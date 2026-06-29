@@ -22,10 +22,26 @@ const COLUMNS = [
   },
 ];
 
+/*
+ * Social links — update href values here when handles change.
+ * To add a new platform, add an entry to this array.
+ */
 const SOCIALS = [
-  { label: "Instagram", href: "https://instagram.com", abbr: "IG" },
-  { label: "TikTok", href: "https://tiktok.com", abbr: "TK" },
-  { label: "LinkedIn", href: "https://linkedin.com", abbr: "LI" },
+  {
+    label: "Instagram",
+    href: "https://instagram.com/tts_scales",
+    abbr: "IG",
+  },
+  {
+    label: "TikTok",
+    href: "https://tiktok.com/@tts_scales",   // update when you have the TikTok handle
+    abbr: "TK",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com",              // update with your LinkedIn URL
+    abbr: "LI",
+  },
 ];
 
 function ZPMark() {
@@ -37,9 +53,21 @@ function ZPMark() {
           <stop offset="100%" stopColor="#7B2FBE" />
         </linearGradient>
       </defs>
-      <polyline points="4,8 18,8 4,26 18,26" stroke="url(#zpFooter)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <polyline points="14,20 20,12 26,20" stroke="url(#zpFooter)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <path d="M22 8 L22 32 M22 8 L32 8 Q38 8 38 16 Q38 24 32 24 L22 24" stroke="url(#zpFooter)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <polyline
+        points="4,8 18,8 4,26 18,26"
+        stroke="url(#zpFooter)" strokeWidth="3"
+        strokeLinecap="round" strokeLinejoin="round" fill="none"
+      />
+      <polyline
+        points="14,20 20,12 26,20"
+        stroke="url(#zpFooter)" strokeWidth="2.5"
+        strokeLinecap="round" strokeLinejoin="round" fill="none"
+      />
+      <path
+        d="M22 8 L22 32 M22 8 L32 8 Q38 8 38 16 Q38 24 32 24 L22 24"
+        stroke="url(#zpFooter)" strokeWidth="3"
+        strokeLinecap="round" strokeLinejoin="round" fill="none"
+      />
     </svg>
   );
 }
@@ -62,7 +90,7 @@ export function Footer() {
               <br />
               Marketing, websites, and creative — for businesses ready to grow.
             </p>
-            <p className="text-[11px] text-white/25 tracking-wider mb-6">
+            <p className="text-[11px] text-white/22 tracking-wider mb-6">
               Baltimore, MD — Serving clients nationwide
             </p>
             <div className="flex gap-5">
@@ -83,7 +111,7 @@ export function Footer() {
 
           {COLUMNS.map((col) => (
             <div key={col.heading}>
-              <p className="text-[10px] font-black tracking-[0.35em] uppercase text-white/30 mb-5">
+              <p className="text-[10px] font-black tracking-[0.35em] uppercase text-white/28 mb-5">
                 {col.heading}
               </p>
               <ul className="space-y-3">
@@ -91,7 +119,7 @@ export function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-white/50 hover:text-white transition-colors"
+                      className="text-sm text-white/45 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
