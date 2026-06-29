@@ -1,0 +1,284 @@
+{
+  "_meta": {
+    "source": "linear.app — extracted from verified design system documentation",
+    "note": "Brand colors (indigo accent, near-black backgrounds) deliberately excluded. Spacing, typography, radius, motion, and layout tokens only.",
+    "baseUnit": "4px",
+    "baseFontSize": "16px",
+    "fontFamilies": {
+      "display": "Inter Variable, SF Pro Display, system-ui, Segoe UI, Helvetica, Arial, sans-serif",
+      "mono": "Berkeley Mono, SF Mono, Consolas, Monaco, monospace"
+    },
+    "openTypeFeatures": ["cv01", "ss03"]
+  },
+
+  "spacing": {
+    "scale": {
+      "0":  "0px",
+      "1":  "1px",
+      "4":  "4px",
+      "8":  "8px",
+      "12": "12px",
+      "16": "16px",
+      "20": "20px",
+      "24": "24px",
+      "32": "32px",
+      "40": "40px",
+      "48": "48px",
+      "64": "64px",
+      "80": "80px",
+      "96": "96px"
+    },
+    "section": {
+      "desktop": { "paddingTop": "80px",  "paddingBottom": "80px"  },
+      "tablet":  { "paddingTop": "40px",  "paddingBottom": "40px"  },
+      "mobile":  { "paddingTop": "20px",  "paddingBottom": "20px"  }
+    },
+    "container": {
+      "marketing": "1080px",
+      "app":       "1280px",
+      "gutterDesktop": "auto",
+      "gutterTablet":  "24px",
+      "gutterMobile":  "16px"
+    },
+    "grid": {
+      "columns": 12,
+      "gutter":  "24px"
+    },
+    "component": {
+      "navHeight":              "64px",
+      "cardPaddingDefault":     "24px",
+      "cardPaddingFeature":     "32px",
+      "modalBody":              "24px",
+      "buttonPaddingVertical":  "8px",
+      "buttonPaddingHorizontal":"16px",
+      "inputPaddingVertical":   "12px",
+      "inputPaddingHorizontal": "14px",
+      "badgePaddingVertical":   "4px",
+      "badgePaddingHorizontal": "10px",
+      "pillPaddingVertical":    "6px",
+      "pillPaddingHorizontal":  "14px",
+      "touchTargetMin":         "44px",
+      "touchTargetGap":         "8px"
+    }
+  },
+
+  "typography": {
+    "fontWeight": {
+      "light":         300,
+      "regular":       400,
+      "uiEmphasis":    510,
+      "strongEmphasis":590,
+      "bold":          700
+    },
+    "scale": {
+      "display-xl": {
+        "fontSize":      "72px",
+        "fontSizeRem":   "4.5rem",
+        "fontWeight":    590,
+        "lineHeight":    1.00,
+        "letterSpacing": "-1.584px",
+        "usage": "Hero headline — largest marketing display size"
+      },
+      "display-lg": {
+        "fontSize":      "64px",
+        "fontSizeRem":   "4rem",
+        "fontWeight":    590,
+        "lineHeight":    1.00,
+        "letterSpacing": "-1.408px",
+        "usage": "Hero headline — standard marketing display"
+      },
+      "display-md": {
+        "fontSize":      "48px",
+        "fontSizeRem":   "3rem",
+        "fontWeight":    510,
+        "lineHeight":    1.00,
+        "letterSpacing": "-1.056px",
+        "usage": "Section hero display"
+      },
+      "heading-lg": {
+        "fontSize":      "32px",
+        "fontSizeRem":   "2rem",
+        "fontWeight":    510,
+        "lineHeight":    1.10,
+        "letterSpacing": "-0.704px",
+        "usage": "Section titles, feature panel headings"
+      },
+      "heading-md": {
+        "fontSize":      "24px",
+        "fontSizeRem":   "1.5rem",
+        "fontWeight":    510,
+        "lineHeight":    1.20,
+        "letterSpacing": "-0.480px",
+        "usage": "Sub-section headings, card group titles"
+      },
+      "heading-sm": {
+        "fontSize":      "20px",
+        "fontSizeRem":   "1.25rem",
+        "fontWeight":    510,
+        "lineHeight":    1.30,
+        "letterSpacing": "-0.240px",
+        "usage": "Card titles, sidebar headings"
+      },
+      "body-lg": {
+        "fontSize":      "18px",
+        "fontSizeRem":   "1.125rem",
+        "fontWeight":    400,
+        "lineHeight":    1.60,
+        "letterSpacing": "-0.165px",
+        "usage": "Hero lede, feature descriptions"
+      },
+      "body-md": {
+        "fontSize":      "16px",
+        "fontSizeRem":   "1rem",
+        "fontWeight":    400,
+        "lineHeight":    1.50,
+        "letterSpacing": "-0.165px",
+        "usage": "Default body text, card descriptions"
+      },
+      "body-emphasis": {
+        "fontSize":      "16px",
+        "fontSizeRem":   "1rem",
+        "fontWeight":    510,
+        "lineHeight":    1.50,
+        "letterSpacing": "-0.165px",
+        "usage": "Emphasized body text, inline labels"
+      },
+      "body-sm": {
+        "fontSize":      "14px",
+        "fontSizeRem":   "0.875rem",
+        "fontWeight":    400,
+        "lineHeight":    1.50,
+        "letterSpacing": "normal",
+        "usage": "Secondary descriptions, UI text"
+      },
+      "small": {
+        "fontSize":      "13px",
+        "fontSizeRem":   "0.8125rem",
+        "fontWeight":    400,
+        "lineHeight":    1.40,
+        "letterSpacing": "normal",
+        "usage": "Metadata, timestamps"
+      },
+      "caption": {
+        "fontSize":      "12px",
+        "fontSizeRem":   "0.75rem",
+        "fontWeight":    510,
+        "lineHeight":    1.40,
+        "letterSpacing": "normal",
+        "usage": "Labels, image captions, badges"
+      },
+      "micro": {
+        "fontSize":      "11px",
+        "fontSizeRem":   "0.6875rem",
+        "fontWeight":    510,
+        "lineHeight":    1.30,
+        "letterSpacing": "normal",
+        "usage": "Tight UI labels"
+      },
+      "tiny": {
+        "fontSize":      "10px",
+        "fontSizeRem":   "0.625rem",
+        "fontWeight":    510,
+        "lineHeight":    1.20,
+        "letterSpacing": "normal",
+        "usage": "Status indicators, dot labels"
+      },
+      "link-nav": {
+        "fontSize":      "14px",
+        "fontSizeRem":   "0.875rem",
+        "fontWeight":    510,
+        "lineHeight":    2.67,
+        "letterSpacing": "normal",
+        "usage": "Navigation links (tall line-height = nav item height)"
+      },
+      "code-md": {
+        "fontSize":      "14px",
+        "fontSizeRem":   "0.875rem",
+        "fontWeight":    510,
+        "lineHeight":    1.60,
+        "letterSpacing": "normal",
+        "fontFamily":    "mono",
+        "usage": "Code blocks"
+      },
+      "code-sm": {
+        "fontSize":      "12px",
+        "fontSizeRem":   "0.75rem",
+        "fontWeight":    510,
+        "lineHeight":    1.60,
+        "letterSpacing": "normal",
+        "fontFamily":    "mono",
+        "usage": "Inline code, small code blocks"
+      }
+    }
+  },
+
+  "borderRadius": {
+    "micro":       "2px",
+    "standard":    "4px",
+    "comfortable": "6px",
+    "card":        "8px",
+    "panel":       "12px",
+    "large":       "22px",
+    "pill":        "9999px",
+    "circle":      "50%"
+  },
+
+  "motion": {
+    "duration": {
+      "instant":  "0ms",
+      "micro":    "100ms",
+      "fast":     "150ms",
+      "normal":   "200ms",
+      "moderate": "300ms",
+      "slow":     "500ms"
+    },
+    "easing": {
+      "default":  "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+      "enter":    "cubic-bezier(0.165, 0.84, 0.44, 1)",
+      "material": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "in":       "cubic-bezier(0.4, 0, 1, 1)"
+    }
+  },
+
+  "breakpoints": {
+    "sm":  "600px",
+    "md":  "768px",
+    "lg":  "1024px",
+    "xl":  "1280px",
+    "2xl": "1536px"
+  },
+
+  "neutralColors": {
+    "_note": "Grayscale scaffold palette only — Linear brand colors (indigo, near-black surfaces) excluded",
+    "canvas":    "#0a0a0a",
+    "surface1":  "#111111",
+    "surface2":  "#1a1a1a",
+    "surface3":  "#222222",
+    "border":    "rgba(255,255,255,0.08)",
+    "borderMid": "rgba(255,255,255,0.12)",
+    "textPrimary":   "#f0f0f0",
+    "textSecondary": "#a0a0a0",
+    "textTertiary":  "#606060",
+    "textMuted":     "#404040",
+    "accentNeutral": "#505050"
+  },
+
+  "shadows": {
+    "card":    "none",
+    "popover": "rgba(0,0,0,0.15) 0 4px 12px, rgba(0,0,0,0.2) 0 8px 24px, inset 0 0 0 1px rgba(255,255,255,0.08)",
+    "modal":   "rgba(0,0,0,0.2) 0 16px 48px, rgba(0,0,0,0.3) 0 32px 72px, inset 0 0 0 1px rgba(255,255,255,0.10)",
+    "inset":   "inset 0 0 0 1px rgba(0,0,0,0.4), inset 0 2px 4px rgba(0,0,0,0.3)"
+  },
+
+  "zIndex": {
+    "base":     0,
+    "raised":   1,
+    "dropdown": 10,
+    "sticky":   50,
+    "overlay":  60,
+    "modal":    70,
+    "popover":  80,
+    "toast":    90,
+    "top":      100
+  }
+}

@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linear.app Structural Scaffold — Spacing & Layout Proof</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS (from linear-tokens.json) ───────────────── */
+    :root {
+      /* spacing scale — 4px base */
+      --sp-0:   0px;
+      --sp-1:   1px;
+      --sp-4:   4px;
+      --sp-8:   8px;
+      --sp-12:  12px;
+      --sp-16:  16px;
+      --sp-20:  20px;
+      --sp-24:  24px;
+      --sp-32:  32px;
+      --sp-40:  40px;
+      --sp-48:  48px;
+      --sp-64:  64px;
+      --sp-80:  80px;
+      --sp-96:  96px;
+
+      /* section padding */
+      --section-pad: 80px;
+
+      /* container */
+      --container-marketing: 1080px;
+      --container-app:       1280px;
+      --container-gutter:    24px;
+      --container-gutter-mobile: 16px;
+
+      /* grid */
+      --grid-gutter: 24px;
+
+      /* component */
+      --nav-height:        64px;
+      --card-pad:          24px;
+      --card-pad-feature:  32px;
+      --btn-pad-v:         8px;
+      --btn-pad-h:         16px;
+
+      /* typography */
+      --font-sans: "Inter", SF Pro Display, system-ui, -apple-system, Helvetica, Arial, sans-serif;
+      --font-mono: "Berkeley Mono", SF Mono, Consolas, Monaco, monospace;
+
+      /* type scale */
+      --text-display-xl:  4.5rem;   /* 72px */
+      --text-display-lg:  4rem;     /* 64px */
+      --text-display-md:  3rem;     /* 48px */
+      --text-heading-lg:  2rem;     /* 32px */
+      --text-heading-md:  1.5rem;   /* 24px */
+      --text-heading-sm:  1.25rem;  /* 20px */
+      --text-body-lg:     1.125rem; /* 18px */
+      --text-body-md:     1rem;     /* 16px */
+      --text-body-sm:     0.875rem; /* 14px */
+      --text-small:       0.8125rem;/* 13px */
+      --text-caption:     0.75rem;  /* 12px */
+      --text-micro:       0.6875rem;/* 11px */
+      --text-tiny:        0.625rem; /* 10px */
+
+      /* font weights */
+      --fw-light:    300;
+      --fw-regular:  400;
+      --fw-ui:       510;
+      --fw-strong:   590;
+      --fw-bold:     700;
+
+      /* letter spacing (negative tracking scales with size) */
+      --ls-display-xl:  -1.584px;
+      --ls-display-lg:  -1.408px;
+      --ls-display-md:  -1.056px;
+      --ls-heading-lg:  -0.704px;
+      --ls-heading-md:  -0.480px;
+      --ls-heading-sm:  -0.240px;
+      --ls-body:        -0.165px;
+      --ls-small:       normal;
+
+      /* line heights */
+      --lh-display:    1.0;
+      --lh-heading-lg: 1.1;
+      --lh-heading-md: 1.2;
+      --lh-heading-sm: 1.3;
+      --lh-body-lg:    1.6;
+      --lh-body-md:    1.5;
+      --lh-caption:    1.4;
+
+      /* border radius */
+      --radius-micro:       2px;
+      --radius-standard:    4px;
+      --radius-comfortable: 6px;
+      --radius-card:        8px;
+      --radius-panel:       12px;
+      --radius-large:       22px;
+      --radius-pill:        9999px;
+
+      /* neutral dark scaffold palette — no brand colors */
+      --canvas:        #0a0a0a;
+      --surface-1:     #111111;
+      --surface-2:     #1a1a1a;
+      --surface-3:     #222222;
+      --border:        rgba(255,255,255,0.08);
+      --border-mid:    rgba(255,255,255,0.12);
+      --text-primary:  #f0f0f0;
+      --text-secondary:#a0a0a0;
+      --text-tertiary: #606060;
+      --text-muted:    #404040;
+      --accent-neutral:#505050;
+
+      /* motion */
+      --dur-fast:   150ms;
+      --dur-normal: 200ms;
+      --ease:       cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-enter: cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    /* ─── RESET ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: var(--font-sans);
+      font-feature-settings: "cv01", "ss03";
+      background: var(--canvas);
+      color: var(--text-primary);
+      font-size: var(--text-body-md);
+      line-height: var(--lh-body-md);
+    }
+    a { color: inherit; text-decoration: none; }
+    img, svg { display: block; }
+
+    /* ─── LAYOUT ──────────────────────────────────────────── */
+    .container {
+      max-width: var(--container-marketing);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--container-gutter);
+      padding-right: var(--container-gutter);
+    }
+
+    .section {
+      padding-top: var(--section-pad);
+      padding-bottom: var(--section-pad);
+    }
+
+    /* ─── TYPOGRAPHY UTILITIES ────────────────────────────── */
+    .text-display-xl {
+      font-size: var(--text-display-xl);
+      font-weight: var(--fw-strong);
+      line-height: var(--lh-display);
+      letter-spacing: var(--ls-display-xl);
+    }
+    .text-display-lg {
+      font-size: var(--text-display-lg);
+      font-weight: var(--fw-strong);
+      line-height: var(--lh-display);
+      letter-spacing: var(--ls-display-lg);
+    }
+    .text-display-md {
+      font-size: var(--text-display-md);
+      font-weight: var(--fw-ui);
+      line-height: var(--lh-display);
+      letter-spacing: var(--ls-display-md);
+    }
+    .text-heading-lg {
+      font-size: var(--text-heading-lg);
+      font-weight: var(--fw-ui);
+      line-height: var(--lh-heading-lg);
+      letter-spacing: var(--ls-heading-lg);
+    }
+    .text-heading-md {
+      font-size: var(--text-heading-md);
+      font-weight: var(--fw-ui);
+      line-height: var(--lh-heading-md);
+      letter-spacing: var(--ls-heading-md);
+    }
+    .text-heading-sm {
+      font-size: var(--text-heading-sm);
+      font-weight: var(--fw-ui);
+      line-height: var(--lh-heading-sm);
+      letter-spacing: var(--ls-heading-sm);
+    }
+    .text-body-lg {
+      font-size: var(--text-body-lg);
+      font-weight: var(--fw-regular);
+      line-height: var(--lh-body-lg);
+      letter-spacing: var(--ls-body);
+    }
+    .text-body-md {
+      font-size: var(--text-body-md);
+      font-weight: var(--fw-regular);
+      line-height: var(--lh-body-md);
+      letter-spacing: var(--ls-body);
+    }
+    .text-body-sm {
+      font-size: var(--text-body-sm);
+      font-weight: var(--fw-regular);
+      line-height: var(--lh-body-md);
+      letter-spacing: var(--ls-small);
+    }
+    .text-caption {
+      font-size: var(--text-caption);
+      font-weight: var(--fw-ui);
+      line-height: var(--lh-caption);
+      letter-spacing: var(--ls-small);
+    }
+    .text-nav {
+      font-size: var(--text-body-sm);
+      font-weight: var(--fw-ui);
+      line-height: 2.67;
+      letter-spacing: var(--ls-small);
+    }
+    .text-secondary { color: var(--text-secondary); }
+    .text-tertiary  { color: var(--text-tertiary); }
+    .text-center    { text-align: center; }
+    .text-mono      { font-family: var(--font-mono); }
+
+    /* ─── WIREFRAME BLOCKS ────────────────────────────────── */
+    .ph-block {
+      display: block;
+      background: var(--surface-3);
+      border-radius: var(--radius-standard);
+    }
+    .ph-inset {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      color: var(--text-tertiary);
+      font-size: var(--text-caption);
+      font-weight: var(--fw-ui);
+      letter-spacing: var(--ls-small);
+    }
+    .ph-icon {
+      width: 32px; height: 32px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-card);
+      flex-shrink: 0;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      height: var(--nav-height);
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav__logo { display: flex; align-items: center; gap: var(--sp-8); }
+    .nav__logo-mark {
+      width: 20px; height: 20px;
+      border-radius: var(--radius-standard);
+      background: var(--surface-3);
+      border: 1px solid var(--border-mid);
+      flex-shrink: 0;
+    }
+    .nav__logo-text { display: block; width: 64px; height: 13px; }
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+      list-style: none;
+    }
+    .nav__links a {
+      display: block;
+      padding: 0 var(--sp-12);
+      color: var(--text-secondary);
+      transition: color var(--dur-fast) var(--ease);
+    }
+    .nav__links a:hover { color: var(--text-primary); }
+    .nav__actions { display: flex; align-items: center; gap: var(--sp-8); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--btn-pad-v) var(--btn-pad-h);
+      border-radius: var(--radius-standard);
+      font-size: var(--text-body-sm);
+      font-weight: var(--fw-ui);
+      letter-spacing: var(--ls-small);
+      transition: all var(--dur-fast) var(--ease);
+      cursor: pointer;
+      border: none;
+    }
+    .btn--ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-mid);
+    }
+    .btn--primary {
+      background: var(--surface-3);
+      color: var(--text-primary);
+      border: 1px solid var(--border-mid);
+    }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      padding-top: var(--section-pad);
+      padding-bottom: var(--section-pad);
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-8);
+      padding: var(--sp-4) var(--sp-12);
+      margin-bottom: var(--sp-32);
+      background: var(--surface-2);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-pill);
+      color: var(--text-secondary);
+    }
+    .hero__eyebrow-dot {
+      width: 6px; height: 6px;
+      background: var(--accent-neutral);
+      border-radius: 50%;
+    }
+    .hero__headline {
+      max-width: 800px;
+      margin: 0 auto var(--sp-24);
+    }
+    .hero__lede {
+      max-width: 520px;
+      margin: 0 auto var(--sp-40);
+      color: var(--text-secondary);
+    }
+    .hero__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-12);
+      margin-bottom: var(--sp-80);
+    }
+    .hero__actions .btn--primary {
+      padding: 10px var(--sp-20);
+    }
+    .hero__visual {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      aspect-ratio: 16/9;
+    }
+
+    /* ─── PROOF STRIP ─────────────────────────────────────── */
+    .proof-strip {
+      padding: var(--sp-32) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .proof-strip__label {
+      text-align: center;
+      margin-bottom: var(--sp-24);
+      color: var(--text-tertiary);
+    }
+    .proof-strip__logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-40);
+      flex-wrap: wrap;
+    }
+    .proof-strip__logo { width: 80px; height: 18px; }
+
+    /* ─── FEATURE PANEL (split) ───────────────────────────── */
+    .feature-panel {
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-panel__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-80);
+      align-items: center;
+    }
+    .feature-panel__inner--reverse { direction: rtl; }
+    .feature-panel__inner--reverse > * { direction: ltr; }
+    .feature-panel__text { }
+    .feature-panel__eyebrow {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-8);
+      margin-bottom: var(--sp-16);
+      color: var(--text-tertiary);
+    }
+    .feature-panel__headline { margin-bottom: var(--sp-16); }
+    .feature-panel__body {
+      margin-bottom: var(--sp-32);
+      color: var(--text-secondary);
+    }
+    .feature-panel__cta { }
+    .feature-panel__visual {
+      aspect-ratio: 4/3;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      overflow: hidden;
+    }
+    /* grid of inner wireframe "UI" rows */
+    .feature-panel__visual-inner {
+      padding: var(--sp-20);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-8);
+    }
+    .ui-row {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-8);
+      padding: var(--sp-8) var(--sp-12);
+      border-radius: var(--radius-card);
+      background: var(--surface-3);
+      border: 1px solid var(--border);
+    }
+    .ui-row__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent-neutral); flex-shrink: 0; }
+    .ui-row__line { height: 10px; border-radius: 2px; background: var(--text-muted); }
+    .ui-row__tag { width: 40px; height: 18px; border-radius: var(--radius-pill); background: var(--surface-3); border: 1px solid var(--border-mid); flex-shrink: 0; }
+
+    /* ─── FEATURE CARD GRID ───────────────────────────────── */
+    .feature-grid {
+      border-bottom: 1px solid var(--border);
+    }
+    .feature-grid__header {
+      max-width: 560px;
+      margin: 0 auto var(--sp-64);
+      text-align: center;
+    }
+    .feature-grid__eyebrow { margin-bottom: var(--sp-16); color: var(--text-tertiary); }
+    .feature-grid__headline { margin-bottom: var(--sp-16); }
+    .feature-grid__lede { color: var(--text-secondary); }
+    .feature-grid__cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--grid-gutter);
+    }
+    .feature-card {
+      padding: var(--card-pad);
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+      transition: border-color var(--dur-normal) var(--ease);
+    }
+    .feature-card:hover { border-color: var(--border-mid); }
+    .feature-card__icon { margin-bottom: var(--sp-16); }
+    .feature-card__title { margin-bottom: var(--sp-8); }
+    .feature-card__body { color: var(--text-secondary); }
+
+    /* ─── TESTIMONIALS ────────────────────────────────────── */
+    .testimonials { border-bottom: 1px solid var(--border); }
+    .testimonials__header {
+      max-width: 480px;
+      margin: 0 auto var(--sp-64);
+      text-align: center;
+    }
+    .testimonials__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--grid-gutter);
+    }
+    .testimonial-card {
+      padding: var(--card-pad);
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-panel);
+    }
+    .testimonial-card__quote {
+      margin-bottom: var(--sp-24);
+      color: var(--text-secondary);
+    }
+    .testimonial-card__author {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-12);
+    }
+    .testimonial-card__avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--surface-3);
+      border: 1px solid var(--border-mid);
+      flex-shrink: 0;
+    }
+    .testimonial-card__name { display: block; width: 90px; height: 11px; margin-bottom: 5px; }
+    .testimonial-card__role { display: block; width: 65px; height: 9px; }
+
+    /* ─── INTEGRATIONS GRID ───────────────────────────────── */
+    .integrations { border-bottom: 1px solid var(--border); }
+    .integrations__header {
+      max-width: 480px;
+      margin: 0 auto var(--sp-48);
+      text-align: center;
+    }
+    .integrations__grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: var(--sp-8);
+    }
+    .integration-tile {
+      aspect-ratio: 1;
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-8);
+      padding: var(--sp-16);
+    }
+    .integration-tile__icon {
+      width: 24px; height: 24px;
+      background: var(--surface-3);
+      border-radius: var(--radius-standard);
+    }
+    .integration-tile__label { display: block; width: 36px; height: 9px; }
+
+    /* ─── CTA BAND ────────────────────────────────────────── */
+    .cta-band {
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .cta-band__headline { margin-bottom: var(--sp-16); }
+    .cta-band__lede {
+      max-width: 400px;
+      margin: 0 auto var(--sp-40);
+      color: var(--text-secondary);
+    }
+    .cta-band__actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--sp-12);
+    }
+    .cta-band__actions .btn--primary { padding: 10px var(--sp-20); }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    .footer {
+      padding-top: var(--sp-48);
+      padding-bottom: var(--sp-48);
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: var(--sp-40);
+      margin-bottom: var(--sp-48);
+    }
+    .footer__brand-logo {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-8);
+      margin-bottom: var(--sp-16);
+    }
+    .footer__brand-logo-mark {
+      width: 16px; height: 16px;
+      background: var(--surface-3);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-standard);
+    }
+    .footer__brand-text { display: block; width: 52px; height: 11px; }
+    .footer__brand-desc { color: var(--text-tertiary); max-width: 220px; }
+    .footer__col-title {
+      display: block;
+      margin-bottom: var(--sp-16);
+      color: var(--text-primary);
+      font-size: var(--text-caption);
+      font-weight: var(--fw-ui);
+      letter-spacing: var(--ls-small);
+    }
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-12);
+    }
+    .footer__links li span {
+      display: block;
+      height: 11px;
+      background: var(--surface-2);
+      border-radius: 2px;
+    }
+    .footer__links li:nth-child(1) span { width: 72px; }
+    .footer__links li:nth-child(2) span { width: 56px; }
+    .footer__links li:nth-child(3) span { width: 80px; }
+    .footer__links li:nth-child(4) span { width: 64px; }
+    .footer__bottom {
+      padding-top: var(--sp-24);
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer__bottom .ph-block { height: 10px; background: var(--surface-2); }
+    .footer__bottom .ph-block:first-child { width: 180px; }
+    .footer__bottom .ph-block:last-child  { width: 120px; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .feature-grid__cards  { grid-template-columns: repeat(2, 1fr); }
+      .testimonials__grid   { grid-template-columns: repeat(2, 1fr); }
+      .integrations__grid   { grid-template-columns: repeat(4, 1fr); }
+      .footer__grid         { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      :root {
+        --section-pad: 40px;
+        --container-gutter: 16px;
+      }
+      .feature-panel__inner { grid-template-columns: 1fr; gap: var(--sp-32); }
+      .feature-panel__inner--reverse { direction: ltr; }
+      .feature-grid__cards  { grid-template-columns: 1fr; }
+      .testimonials__grid   { grid-template-columns: 1fr; }
+      .integrations__grid   { grid-template-columns: repeat(3, 1fr); }
+      .footer__grid         { grid-template-columns: 1fr; }
+      .nav__links           { display: none; }
+      .hero__headline       { font-size: var(--text-display-md); letter-spacing: var(--ls-display-md); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAV  — 64px tall, blurred, sticky
+  ════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <div class="nav__logo">
+        <div class="nav__logo-mark"></div>
+        <span class="ph-block nav__logo-text"></span><!-- {{NAV_LOGO_WORDMARK}} -->
+      </div>
+
+      <ul class="nav__links">
+        <li><a class="text-nav" href="#">{{NAV_LINK_1}}</a></li>
+        <li><a class="text-nav" href="#">{{NAV_LINK_2}}</a></li>
+        <li><a class="text-nav" href="#">{{NAV_LINK_3}}</a></li>
+        <li><a class="text-nav" href="#">{{NAV_LINK_4}}</a></li>
+        <li><a class="text-nav" href="#">{{NAV_LINK_5}}</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="btn btn--ghost">{{NAV_CTA_SECONDARY}}</button>
+        <button class="btn btn--primary">{{NAV_CTA_PRIMARY}}</button>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO  — display-xl headline, body-lg lede,
+               two CTAs, full-width product visual
+  ════════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="container">
+
+      <div class="hero__eyebrow text-caption">
+        <div class="hero__eyebrow-dot"></div>
+        {{HERO_EYEBROW}}
+      </div>
+
+      <h1 class="hero__headline text-display-xl">
+        {{HERO_HEADLINE}}
+      </h1>
+
+      <p class="hero__lede text-body-lg">
+        {{HERO_LEDE}}
+      </p>
+
+      <div class="hero__actions">
+        <button class="btn btn--primary">{{HERO_CTA_PRIMARY}}</button>
+        <button class="btn btn--ghost">{{HERO_CTA_SECONDARY}}</button>
+      </div>
+
+      <!-- Product screenshot placeholder -->
+      <div class="hero__visual ph-inset">
+        <span>{{HERO_PRODUCT_SCREENSHOT}}</span>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       PROOF STRIP  — trusted-by logos, compact band
+  ════════════════════════════════════════════ -->
+  <div class="proof-strip">
+    <div class="container">
+      <p class="proof-strip__label text-caption">{{PROOF_STRIP_LABEL}}</p>
+      <div class="proof-strip__logos">
+        <span class="ph-block proof-strip__logo"></span><!-- {{CLIENT_LOGO_1}} -->
+        <span class="ph-block proof-strip__logo"></span><!-- {{CLIENT_LOGO_2}} -->
+        <span class="ph-block proof-strip__logo"></span><!-- {{CLIENT_LOGO_3}} -->
+        <span class="ph-block proof-strip__logo"></span><!-- {{CLIENT_LOGO_4}} -->
+        <span class="ph-block proof-strip__logo"></span><!-- {{CLIENT_LOGO_5}} -->
+        <span class="ph-block proof-strip__logo"></span><!-- {{CLIENT_LOGO_6}} -->
+        <span class="ph-block proof-strip__logo"></span><!-- {{CLIENT_LOGO_7}} -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════
+       FEATURE PANEL A  — text left, visual right
+       heading-lg headline, body-md description
+  ════════════════════════════════════════════ -->
+  <section class="section feature-panel">
+    <div class="container">
+      <div class="feature-panel__inner">
+
+        <div class="feature-panel__text">
+          <div class="feature-panel__eyebrow text-caption">
+            <div class="ph-icon" style="width:16px;height:16px;border-radius:3px;"></div>
+            {{FEATURE_A_EYEBROW}}
+          </div>
+          <h2 class="feature-panel__headline text-heading-lg">{{FEATURE_A_HEADLINE}}</h2>
+          <p class="feature-panel__body text-body-md">{{FEATURE_A_BODY}}</p>
+          <button class="btn btn--ghost feature-panel__cta">{{FEATURE_A_CTA}}</button>
+        </div>
+
+        <div class="feature-panel__visual">
+          <div class="feature-panel__visual-inner">
+            <div class="ui-row">
+              <div class="ui-row__dot"></div>
+              <div class="ui-row__line" style="flex:1;"></div>
+              <div class="ui-row__tag"></div>
+            </div>
+            <div class="ui-row">
+              <div class="ui-row__dot" style="background:var(--surface-3);border:1px solid var(--border-mid);"></div>
+              <div class="ui-row__line" style="width:60%;"></div>
+              <div class="ui-row__tag"></div>
+            </div>
+            <div class="ui-row">
+              <div class="ui-row__dot"></div>
+              <div class="ui-row__line" style="flex:1;"></div>
+              <div class="ui-row__tag"></div>
+            </div>
+            <div class="ui-row">
+              <div class="ui-row__dot" style="background:var(--surface-3);border:1px solid var(--border-mid);"></div>
+              <div class="ui-row__line" style="width:75%;"></div>
+              <div class="ui-row__tag"></div>
+            </div>
+            <div class="ui-row">
+              <div class="ui-row__dot"></div>
+              <div class="ui-row__line" style="flex:1;"></div>
+              <div class="ui-row__tag"></div>
+            </div>
+            <div class="ui-row">
+              <div class="ui-row__dot" style="background:var(--surface-3);border:1px solid var(--border-mid);"></div>
+              <div class="ui-row__line" style="width:50%;"></div>
+              <div class="ui-row__tag"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FEATURE PANEL B  — visual left, text right
+  ════════════════════════════════════════════ -->
+  <section class="section feature-panel">
+    <div class="container">
+      <div class="feature-panel__inner feature-panel__inner--reverse">
+
+        <div class="feature-panel__text">
+          <div class="feature-panel__eyebrow text-caption">
+            <div class="ph-icon" style="width:16px;height:16px;border-radius:3px;"></div>
+            {{FEATURE_B_EYEBROW}}
+          </div>
+          <h2 class="feature-panel__headline text-heading-lg">{{FEATURE_B_HEADLINE}}</h2>
+          <p class="feature-panel__body text-body-md">{{FEATURE_B_BODY}}</p>
+          <button class="btn btn--ghost feature-panel__cta">{{FEATURE_B_CTA}}</button>
+        </div>
+
+        <div class="feature-panel__visual">
+          <div class="feature-panel__visual-inner">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-8);height:100%;">
+              <div style="display:flex;flex-direction:column;gap:var(--sp-8);">
+                <div class="ui-row" style="flex-direction:column;align-items:flex-start;gap:var(--sp-8);padding:var(--sp-12);">
+                  <div class="ui-row__dot"></div>
+                  <div class="ui-row__line" style="width:80%;"></div>
+                  <div class="ui-row__line" style="width:55%;background:var(--text-muted);"></div>
+                </div>
+                <div class="ui-row" style="flex-direction:column;align-items:flex-start;gap:var(--sp-8);padding:var(--sp-12);">
+                  <div class="ui-row__dot" style="background:var(--surface-3);border:1px solid var(--border-mid);"></div>
+                  <div class="ui-row__line" style="width:70%;"></div>
+                  <div class="ui-row__line" style="width:45%;background:var(--text-muted);"></div>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:var(--sp-8);">
+                <div class="ui-row" style="flex-direction:column;align-items:flex-start;gap:var(--sp-8);padding:var(--sp-12);">
+                  <div class="ui-row__dot"></div>
+                  <div class="ui-row__line" style="width:90%;"></div>
+                  <div class="ui-row__line" style="width:60%;background:var(--text-muted);"></div>
+                </div>
+                <div class="ui-row" style="flex-direction:column;align-items:flex-start;gap:var(--sp-8);padding:var(--sp-12);">
+                  <div class="ui-row__dot" style="background:var(--surface-3);border:1px solid var(--border-mid);"></div>
+                  <div class="ui-row__line" style="width:65%;"></div>
+                  <div class="ui-row__line" style="width:40%;background:var(--text-muted);"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FEATURE CARD GRID  — 3-up, 24px gap,
+       icon + heading-sm + body-sm per card
+  ════════════════════════════════════════════ -->
+  <section class="section feature-grid">
+    <div class="container">
+
+      <div class="feature-grid__header">
+        <p class="feature-grid__eyebrow text-caption">{{FEATURES_EYEBROW}}</p>
+        <h2 class="feature-grid__headline text-heading-lg">{{FEATURES_HEADLINE}}</h2>
+        <p class="feature-grid__lede text-body-md">{{FEATURES_LEDE}}</p>
+      </div>
+
+      <div class="feature-grid__cards">
+
+        <div class="feature-card">
+          <div class="feature-card__icon ph-icon"></div>
+          <h3 class="feature-card__title text-heading-sm">{{FEATURE_1_TITLE}}</h3>
+          <p class="feature-card__body text-body-sm">{{FEATURE_1_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon ph-icon"></div>
+          <h3 class="feature-card__title text-heading-sm">{{FEATURE_2_TITLE}}</h3>
+          <p class="feature-card__body text-body-sm">{{FEATURE_2_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon ph-icon"></div>
+          <h3 class="feature-card__title text-heading-sm">{{FEATURE_3_TITLE}}</h3>
+          <p class="feature-card__body text-body-sm">{{FEATURE_3_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon ph-icon"></div>
+          <h3 class="feature-card__title text-heading-sm">{{FEATURE_4_TITLE}}</h3>
+          <p class="feature-card__body text-body-sm">{{FEATURE_4_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon ph-icon"></div>
+          <h3 class="feature-card__title text-heading-sm">{{FEATURE_5_TITLE}}</h3>
+          <p class="feature-card__body text-body-sm">{{FEATURE_5_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card__icon ph-icon"></div>
+          <h3 class="feature-card__title text-heading-sm">{{FEATURE_6_TITLE}}</h3>
+          <p class="feature-card__body text-body-sm">{{FEATURE_6_BODY}}</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS  — 3-up cards, body-lg quotes
+  ════════════════════════════════════════════ -->
+  <section class="section testimonials">
+    <div class="container">
+
+      <div class="testimonials__header">
+        <h2 class="text-heading-lg">{{TESTIMONIALS_HEADLINE}}</h2>
+      </div>
+
+      <div class="testimonials__grid">
+
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote text-body-md">"{{TESTIMONIAL_1_QUOTE}}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar"></div>
+            <div>
+              <span class="ph-block testimonial-card__name"></span><!-- {{TESTIMONIAL_1_NAME}} -->
+              <span class="ph-block testimonial-card__role"></span><!-- {{TESTIMONIAL_1_ROLE}} -->
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote text-body-md">"{{TESTIMONIAL_2_QUOTE}}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar"></div>
+            <div>
+              <span class="ph-block testimonial-card__name"></span><!-- {{TESTIMONIAL_2_NAME}} -->
+              <span class="ph-block testimonial-card__role"></span><!-- {{TESTIMONIAL_2_ROLE}} -->
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote text-body-md">"{{TESTIMONIAL_3_QUOTE}}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar"></div>
+            <div>
+              <span class="ph-block testimonial-card__name"></span><!-- {{TESTIMONIAL_3_NAME}} -->
+              <span class="ph-block testimonial-card__role"></span><!-- {{TESTIMONIAL_3_ROLE}} -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       INTEGRATIONS  — 6-col dense icon grid
+  ════════════════════════════════════════════ -->
+  <section class="section integrations">
+    <div class="container">
+
+      <div class="integrations__header">
+        <h2 class="text-heading-lg" style="margin-bottom:var(--sp-16);">{{INTEGRATIONS_HEADLINE}}</h2>
+        <p class="text-body-md text-secondary">{{INTEGRATIONS_LEDE}}</p>
+      </div>
+
+      <div class="integrations__grid">
+        <!-- 12 integration tiles -->
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_1}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_2}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_3}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_4}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_5}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_6}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_7}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_8}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_9}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_10}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_11}} -->
+        </div>
+        <div class="integration-tile">
+          <div class="integration-tile__icon"></div>
+          <span class="ph-block integration-tile__label"></span><!-- {{INTEGRATION_12}} -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CTA BAND  — centered heading-lg + single CTA
+  ════════════════════════════════════════════ -->
+  <section class="section cta-band">
+    <div class="container">
+      <h2 class="cta-band__headline text-heading-lg">{{CTA_HEADLINE}}</h2>
+      <p class="cta-band__lede text-body-md">{{CTA_LEDE}}</p>
+      <div class="cta-band__actions">
+        <button class="btn btn--primary">{{CTA_PRIMARY}}</button>
+        <button class="btn btn--ghost">{{CTA_SECONDARY}}</button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER  — 5-col link grid + legal bar
+  ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div>
+          <div class="footer__brand-logo">
+            <div class="footer__brand-logo-mark"></div>
+            <span class="ph-block footer__brand-text"></span><!-- {{FOOTER_LOGO}} -->
+          </div>
+          <p class="footer__brand-desc text-body-sm">{{FOOTER_TAGLINE}}</p>
+        </div>
+
+        <div>
+          <span class="footer__col-title">{{FOOTER_COL_1_TITLE}}</span>
+          <ul class="footer__links">
+            <li><span></span></li><!-- {{FOOTER_LINK_1_1}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_1_2}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_1_3}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_1_4}} -->
+          </ul>
+        </div>
+
+        <div>
+          <span class="footer__col-title">{{FOOTER_COL_2_TITLE}}</span>
+          <ul class="footer__links">
+            <li><span></span></li><!-- {{FOOTER_LINK_2_1}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_2_2}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_2_3}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_2_4}} -->
+          </ul>
+        </div>
+
+        <div>
+          <span class="footer__col-title">{{FOOTER_COL_3_TITLE}}</span>
+          <ul class="footer__links">
+            <li><span></span></li><!-- {{FOOTER_LINK_3_1}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_3_2}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_3_3}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_3_4}} -->
+          </ul>
+        </div>
+
+        <div>
+          <span class="footer__col-title">{{FOOTER_COL_4_TITLE}}</span>
+          <ul class="footer__links">
+            <li><span></span></li><!-- {{FOOTER_LINK_4_1}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_4_2}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_4_3}} -->
+            <li><span></span></li><!-- {{FOOTER_LINK_4_4}} -->
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <span class="ph-block"></span><!-- {{FOOTER_COPYRIGHT}} -->
+        <span class="ph-block"></span><!-- {{FOOTER_LEGAL_LINKS}} -->
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
