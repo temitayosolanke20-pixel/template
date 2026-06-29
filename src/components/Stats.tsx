@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const STATS = [
-  { value: 94, suffix: "%", label: "Client retention rate" },
-  { value: 3, suffix: "x", label: "Average lead increase in 90 days" },
+  { value: 94, suffix: "%", label: "Client retention" },
+  { value: 3, suffix: "x", label: "Avg lead increase, 90 days" },
   { value: 300, suffix: "+", label: "Video creatives delivered" },
-  { value: 48, suffix: "hr", label: "Average onboarding time" },
+  { value: 48, suffix: "hr", label: "Avg onboarding time" },
 ];
 
 function AnimatedNumber({ value, suffix, inView }: { value: number; suffix: string; inView: boolean }) {
@@ -34,7 +34,7 @@ export function Stats() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-16 md:py-20 border-y border-white/[0.05] bg-[#0D0D1A]">
+    <section ref={ref} className="py-20 md:py-24 border-y border-white/[0.05] bg-[#0D0D1A]">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/[0.05]">
           {STATS.map((stat, i) => (
@@ -44,10 +44,10 @@ export function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="p-6 md:p-10 text-center"
+              className="p-8 md:p-12 text-center"
             >
               <p
-                className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight"
+                className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-4"
                 style={{
                   background: "linear-gradient(135deg, #A855F7, #7B2FBE)",
                   WebkitBackgroundClip: "text",
@@ -57,7 +57,7 @@ export function Stats() {
               >
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} inView={inView} />
               </p>
-              <p className="mt-2 md:mt-3 text-xs text-[#F8F8FF]/40 tracking-wider leading-relaxed">
+              <p className="text-xs text-[#F8F8FF]/40 tracking-wider leading-relaxed">
                 {stat.label}
               </p>
             </motion.div>

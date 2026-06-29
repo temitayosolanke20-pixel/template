@@ -32,19 +32,11 @@ function VideoCard({ video, index }: { video: (typeof VIDEOS)[0]; index: number 
       className="group relative overflow-hidden border border-white/[0.07] hover:border-purple-500/35 transition-colors duration-500"
       style={{ aspectRatio: "9/16" }}
     >
-      <video
-        ref={videoRef}
-        src={video.src}
-        autoPlay
-        loop
-        muted
-        playsInline
+      <video ref={videoRef} src={video.src} autoPlay loop muted playsInline
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:via-black/10 transition-all duration-500 pointer-events-none" aria-hidden="true" />
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        aria-hidden="true"
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" aria-hidden="true"
         style={{ background: "linear-gradient(to bottom, transparent 40%, rgba(123,47,190,0.25) 100%)" }}
       />
       <div className="absolute top-4 left-4 z-10">
@@ -73,12 +65,8 @@ function VideoCard({ video, index }: { video: (typeof VIDEOS)[0]; index: number 
       </div>
       <AnimatePresence>
         {active && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 pointer-events-none"
-            aria-hidden="true"
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="absolute inset-0 pointer-events-none" aria-hidden="true"
             style={{ boxShadow: "inset 0 0 0 1px rgba(168,85,247,0.3)" }}
           />
         )}
@@ -89,62 +77,34 @@ function VideoCard({ video, index }: { video: (typeof VIDEOS)[0]; index: number 
 
 export function CreativeShowcase() {
   return (
-    <section id="creative-work" className="py-20 md:py-28 lg:py-32 bg-[#0D0D1A]">
+    <section id="creative-work" className="py-32 md:py-40 bg-[#0D0D1A]">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-[10px] font-black tracking-[0.45em] uppercase text-purple-400 mb-4">Our Work</p>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <p className="text-[10px] font-black tracking-[0.45em] uppercase text-purple-400 mb-5">Our Work</p>
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight">
               Creatives That{" "}
-              <span
-                style={{
-                  background: "linear-gradient(135deg, #A855F7, #7B2FBE)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
+              <span style={{ background: "linear-gradient(135deg, #A855F7, #7B2FBE)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
                 Stop the Scroll
               </span>
             </h2>
           </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="md:text-right max-w-xs"
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+            className="md:text-right"
           >
-            <p className="text-sm text-[#F8F8FF]/40 leading-relaxed">
-              Hover to play. Click the speaker icon for audio.
-            </p>
-            <a
-              href="#marketplace"
-              className="inline-flex items-center gap-2 mt-4 text-[11px] font-black tracking-[0.2em] uppercase text-purple-400 hover:text-[#F8F8FF] transition-colors group"
+            <a href="#marketplace"
+              className="inline-flex items-center gap-2 text-[11px] font-black tracking-[0.2em] uppercase text-purple-400 hover:text-[#F8F8FF] transition-colors group"
             >
               Order a Package <span className="group-hover:translate-x-1 transition-transform">→</span>
             </a>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-10">
           {VIDEOS.map((video, i) => (
             <VideoCard key={video.id} video={video} index={i} />
           ))}
         </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-10 text-center text-xs text-[#F8F8FF]/25 tracking-wider"
-        >
-          Real creatives produced for clients. Your brand gets the same treatment.
-        </motion.p>
       </div>
     </section>
   );
