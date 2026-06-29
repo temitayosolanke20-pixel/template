@@ -7,19 +7,25 @@ import { Marketplace } from "@/components/Marketplace";
 import { Testimonials } from "@/components/Testimonials";
 import { Pricing } from "@/components/Pricing";
 import { CTA } from "@/components/CTA";
+import { AltitudeProgress } from "@/components/AltitudeProgress";
 
 export default function Home() {
   return (
-    <main className="pt-[calc(var(--announcement-height,32px)+64px)]">
-      <Hero />
-      <Services />
-      <WhoWeServe />
-      <Stats />
-      <Process />
-      <Marketplace />
-      <Testimonials />
-      <Pricing />
-      <CTA />
-    </main>
+    <>
+      {/* Fixed altitude progress indicator — right edge, desktop only */}
+      <AltitudeProgress />
+
+      <main className="pt-[calc(var(--announcement-height,32px)+64px)]">
+        <Hero />
+        <Services />
+        <WhoWeServe />
+        <Stats />
+        <Process />
+        <Marketplace />
+        <Testimonials />
+        <Pricing />
+        <CTA />
+      </main>
+    </>
   );
 }

@@ -11,6 +11,7 @@ html {
 }
 
 body {
+  /* Cold dark — not pure black, has a deep icy blue-indigo undertone */
   background: #0D0D1A;
   color: #F8F8FF;
   overflow-x: hidden;
@@ -33,11 +34,44 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.35; }
-  50%       { opacity: 0.7; }
+  50%       { opacity: 0.72; }
 }
 
 .pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
+  animation: pulse-glow 5s ease-in-out infinite;
+}
+
+/* Subtle shimmer on ridge lines */
+@keyframes ridge-shimmer {
+  0%   { opacity: 0.12; }
+  50%  { opacity: 0.28; }
+  100% { opacity: 0.12; }
+}
+
+.ridge-shimmer {
+  animation: ridge-shimmer 8s ease-in-out infinite;
+}
+
+/* Frost mist — used as overlay at mountain base */
+.frost-mist {
+  background: linear-gradient(
+    to top,
+    rgba(13, 13, 26, 1) 0%,
+    rgba(14, 12, 28, 0.7) 30%,
+    rgba(10, 8, 22, 0.2) 60%,
+    transparent 100%
+  );
+}
+
+/* Cold section background — slightly cooler than base */
+.bg-cold {
+  background: #0a0a16;
+}
+
+/* Elevation mark — horizontal rule with altitude feel */
+.elevation-mark {
+  border-top: 1px solid rgba(168, 85, 247, 0.08);
+  position: relative;
 }
 
 ::-webkit-scrollbar { width: 3px; }
