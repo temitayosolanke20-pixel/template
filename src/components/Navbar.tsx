@@ -8,7 +8,6 @@ const NAV_LINKS = [
   { label: "Services", href: "#services" },
   { label: "Who We Serve", href: "#who-we-serve" },
   { label: "Marketplace", href: "#marketplace" },
-  { label: "Pricing", href: "#pricing" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -83,7 +82,7 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.slice(0, 4).map((link) => (
+            {NAV_LINKS.slice(0, 3).map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

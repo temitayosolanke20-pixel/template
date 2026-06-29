@@ -34,8 +34,8 @@ export function Stats() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-16 md:py-24 border-y border-white/[0.05] bg-[#0D0D1A]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section ref={ref} className="py-16 md:py-20 border-y border-white/[0.05] bg-[#0D0D1A]">
+      <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/[0.05]">
           {STATS.map((stat, i) => (
             <motion.div
@@ -57,7 +57,7 @@ export function Stats() {
               >
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} inView={inView} />
               </p>
-              <p className="mt-2 md:mt-3 text-xs text-white/40 tracking-wider leading-relaxed">
+              <p className="mt-2 md:mt-3 text-xs text-[#F8F8FF]/40 tracking-wider leading-relaxed">
                 {stat.label}
               </p>
             </motion.div>

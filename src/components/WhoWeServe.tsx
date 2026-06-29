@@ -14,17 +14,17 @@ const INDUSTRIES = [
 ];
 
 const PAIN_POINTS = [
-  "Inconsistent lead flow — good months, dead months",
-  "Weak branding that loses jobs before the estimate",
-  "No time to run your own ads or manage content",
-  "Competitors with worse work are winning on social",
+  "Inconsistent lead flow — feast or famine months",
+  "Competitors with worse work winning on social",
+  "No time to run ads or manage content yourself",
+  "Branding that loses jobs before the estimate",
 ];
 
 export function WhoWeServe() {
   return (
-    <section id="who-we-serve" className="py-32 border-t border-white/[0.05]" style={{ background: "#0a0a14" }}>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <section id="who-we-serve" className="py-20 md:py-28 lg:py-32 border-t border-white/[0.05]" style={{ background: "#0a0a14" }}>
+      <div className="mx-auto max-w-7xl px-6 md:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -36,7 +36,7 @@ export function WhoWeServe() {
               Who We Serve
             </p>
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight mb-6">
-              Built for the Business
+              Built for Businesses
               <br />
               Where One Customer
               <br />
@@ -51,13 +51,13 @@ export function WhoWeServe() {
                 Changes Everything.
               </span>
             </h2>
-            <p className="text-sm text-white/50 leading-relaxed max-w-md mb-10">
-              We specialize in service-based businesses with high customer value — where one job can mean{" "}
-              <span className="text-white/80 font-semibold">$1,000–$5,000+</span> in revenue. That means fewer
-              conversions needed to make your ad spend clearly worth it. That&apos;s the ROI story we tell — and deliver.
+            <p className="text-base text-[#F8F8FF]/50 leading-relaxed max-w-prose mb-8">
+              Service businesses where one job means{" "}
+              <span className="text-[#F8F8FF]/80 font-semibold">$1,000–$5,000+</span>. Fewer
+              conversions needed, cleaner ROI. That&apos;s the story we tell — and deliver.
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-4 mb-8">
               {PAIN_POINTS.map((point, i) => (
                 <motion.div
                   key={i}
@@ -67,10 +67,10 @@ export function WhoWeServe() {
                   transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="flex items-start gap-3"
                 >
-                  <span className="mt-0.5 w-4 h-4 rounded-full bg-purple-500/20 border border-purple-500/40 flex items-center justify-center flex-shrink-0">
+                  <span className="mt-1 w-4 h-4 rounded-full bg-purple-500/20 border border-purple-500/40 flex items-center justify-center flex-shrink-0">
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
                   </span>
-                  <p className="text-sm text-white/60">{point}</p>
+                  <p className="text-sm text-[#F8F8FF]/60">{point}</p>
                 </motion.div>
               ))}
             </div>
@@ -80,11 +80,11 @@ export function WhoWeServe() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.5 }}
-              className="mt-10 p-5 border border-purple-500/20 bg-purple-500/5"
+              className="p-5 border border-purple-500/20 bg-purple-500/5"
             >
-              <p className="text-sm text-white/80 leading-relaxed">
-                <span className="text-purple-400 font-bold">If that sounds like you</span> — you deliver great
-                work, you just need more of the right people finding you. That&apos;s exactly what we&apos;re here for.
+              <p className="text-sm text-[#F8F8FF]/80 leading-relaxed">
+                <span className="text-purple-400 font-bold">Sound familiar?</span>{" "}
+                You deliver great work — you just need more of the right people finding you.
               </p>
             </motion.div>
           </motion.div>
@@ -108,11 +108,11 @@ export function WhoWeServe() {
                   className="flex items-center gap-4 p-5 border border-white/[0.06] bg-white/[0.02] transition-all duration-300"
                 >
                   <span className="text-2xl">{industry.icon}</span>
-                  <span className="text-sm font-bold text-white/70">{industry.label}</span>
+                  <span className="text-sm font-bold text-[#F8F8FF]/70">{industry.label}</span>
                 </motion.div>
               ))}
             </div>
-            <p className="mt-4 text-[11px] text-white/25 tracking-wider text-center">
+            <p className="mt-4 text-[11px] text-[#F8F8FF]/25 tracking-wider text-center">
               + clothing brands & creative businesses
             </p>
           </motion.div>

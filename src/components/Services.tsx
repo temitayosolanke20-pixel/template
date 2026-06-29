@@ -9,7 +9,7 @@ const SERVICES = [
     label: "Marketing & Growth",
     title: "Ad Management",
     description:
-      "We run your Meta ad accounts from top to bottom — strategy, creative, targeting, and daily optimization. One flat retainer. Consistent leads. Built for service businesses where one new customer is worth $1,000–$2,000+.",
+      "Full Meta ad management — strategy, creative, targeting, daily optimization. One flat retainer. One new customer worth $1,000–$2,000+ covers the fee.",
     highlight: "Lead guarantee or you don't pay.",
     cta: "Get Started",
     href: "#contact",
@@ -24,7 +24,7 @@ const SERVICES = [
     label: "Websites",
     title: "Web Creation",
     description:
-      "Custom sites built to convert — not just look good. Or choose from our premium template library and launch fast. Mobile-first, fast-loading, and designed to make your business look like the authority in your market.",
+      "Custom sites built to convert, not just look good. Or pick a premium template and launch in days. Mobile-first, fast, built for authority.",
     highlight: "Custom builds + ready-to-launch templates.",
     cta: "See Templates",
     href: "#marketplace",
@@ -39,8 +39,8 @@ const SERVICES = [
     label: "Creative Package",
     title: "Video Creatives",
     description:
-      "Need scroll-stopping content without a retainer? Send your product or brand info — we send back a polished video package. No meetings, no fluff. Just finished, on-brand creatives ready to run.",
-    highlight: "Flat rate. Starting at $300. No retainer required.",
+      "Send your brand info, get back polished ad-ready video. No retainer, no meetings. Finished creatives ready to run, starting at $300.",
+    highlight: "Flat rate. No retainer required.",
     cta: "Order a Package",
     href: "#marketplace",
     icon: (
@@ -51,11 +51,6 @@ const SERVICES = [
   },
 ];
 
-/*
- * Hover tilt card. Uses rotateX/rotateY only — no preserve-3d or translateZ,
- * which caused content to protrude outside the card's layout box and get
- * clipped at section boundaries. The tilt effect is identical visually.
- */
 function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0);
@@ -81,9 +76,9 @@ function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: numb
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.15, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="relative bg-[#0D0D1A] border border-white/[0.07] p-8 md:p-10 group hover:border-purple-500/30 transition-colors duration-500 cursor-default"
+      className="relative bg-[#0D0D1A] border border-white/[0.07] p-6 md:p-8 group hover:border-purple-500/30 transition-colors duration-500 cursor-default"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 group-hover:from-purple-600/[0.06] to-transparent transition-all duration-500 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 group-hover:from-purple-600/[0.06] to-transparent transition-all duration-500 pointer-events-none" aria-hidden="true" />
 
       <div className="flex items-start justify-between mb-6">
         <span className="text-[10px] font-black tracking-[0.4em] uppercase text-purple-500/50">
@@ -94,13 +89,13 @@ function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: numb
         </span>
       </div>
 
-      <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-2">
+      <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#F8F8FF]/30 mb-2">
         {service.label}
       </p>
-      <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mb-5">
+      <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight leading-tight text-[#F8F8FF] mb-4">
         {service.title}
       </h3>
-      <p className="text-sm text-white/50 leading-relaxed mb-6">
+      <p className="text-sm text-[#F8F8FF]/50 leading-relaxed mb-6">
         {service.description}
       </p>
       <p className="text-[11px] font-bold text-purple-400 tracking-wide mb-6">
@@ -108,7 +103,7 @@ function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: numb
       </p>
       <a
         href={service.href}
-        className="inline-flex items-center gap-2 text-[11px] font-black tracking-[0.25em] uppercase text-white/50 hover:text-white transition-colors group/link"
+        className="inline-flex items-center gap-2 text-[11px] font-black tracking-[0.25em] uppercase text-[#F8F8FF]/50 hover:text-[#F8F8FF] transition-colors group/link"
       >
         {service.cta}
         <span className="text-purple-400 group-hover/link:translate-x-1.5 transition-transform duration-300">
@@ -121,20 +116,19 @@ function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: numb
 
 export function Services() {
   return (
-    <section id="services" className="py-24 md:py-32 bg-[#0D0D1A]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section id="services" className="py-20 md:py-28 lg:py-32 bg-[#0D0D1A]">
+      <div className="mx-auto max-w-7xl px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-14"
+          className="mb-12"
         >
           <p className="text-[10px] font-black tracking-[0.45em] uppercase text-purple-400 mb-4">
             What We Do
           </p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none">
-            Three Ways
-            <br />
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-tight">
+            Three Ways{" "}
             <span
               style={{
                 background: "linear-gradient(135deg, #A855F7, #7B2FBE)",
@@ -148,7 +142,7 @@ export function Services() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {SERVICES.map((s, i) => (
             <TiltCard key={s.number} service={s} index={i} />
           ))}

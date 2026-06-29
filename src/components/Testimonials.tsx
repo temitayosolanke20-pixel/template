@@ -9,7 +9,7 @@ const REVIEWS = [
     name: "Marcus T.",
     business: "MT Roofing & Exteriors",
     location: "Baltimore, MD",
-    text: "We went from 2–3 leads a week to 12–15 in the first month. The creatives they made look better than anything I've seen from local competitors. Worth every dollar.",
+    text: "We went from 2–3 leads a week to 12–15 in the first month. The creatives look better than anything from local competitors. Worth every dollar.",
     result: "5x lead increase in 30 days",
   },
   {
@@ -17,7 +17,7 @@ const REVIEWS = [
     name: "Jordan W.",
     business: "Westside Landscape Group",
     location: "Columbia, MD",
-    text: "I was skeptical about spending money on ads. But they walked me through exactly how it works and delivered. Our spring season was the biggest we've ever had.",
+    text: "I was skeptical about spending on ads. They walked me through how it works and delivered. Our spring season was the biggest we've ever had.",
     result: "Record revenue season",
   },
   {
@@ -25,15 +25,15 @@ const REVIEWS = [
     name: "Denise F.",
     business: "Premier Kitchen & Bath",
     location: "Annapolis, MD",
-    text: "The website they built for us finally makes us look like a premium brand. We've had customers mention it before even meeting us. The brand work alone was worth it.",
-    result: "Closed higher-ticket projects",
+    text: "The website finally makes us look like a premium brand. Customers mention it before we've even met. The brand work alone was worth it.",
+    result: "Closing higher-ticket projects",
   },
   {
     id: 4,
     name: "Chris A.",
     business: "All-Star Solar Solutions",
     location: "Towson, MD",
-    text: "Professional, responsive, and they actually get it done. No chasing, no excuses. Our ads are converting and the creative quality is something we're genuinely proud of.",
+    text: "Professional, responsive, gets it done. No chasing, no excuses. Ads converting and the creative quality is something we're genuinely proud of.",
     result: "30+ qualified consultations / month",
   },
 ];
@@ -47,8 +47,8 @@ export function Testimonials() {
   }, []);
 
   return (
-    <section className="py-32 bg-[#0D0D1A]">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-20 md:py-28 lg:py-32 bg-[#0D0D1A]">
+      <div className="mx-auto max-w-7xl px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -58,7 +58,7 @@ export function Testimonials() {
           <p className="text-[10px] font-black tracking-[0.45em] uppercase text-purple-400 mb-4">
             Client Results
           </p>
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight">
             Real Businesses.{" "}
             <span
               style={{
@@ -74,7 +74,7 @@ export function Testimonials() {
         </motion.div>
 
         {/* Featured review */}
-        <div className="max-w-3xl mx-auto text-center mb-14">
+        <div className="max-w-3xl mx-auto text-center mb-12">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -90,13 +90,13 @@ export function Testimonials() {
                   </svg>
                 ))}
               </div>
-              <p className="text-xl md:text-2xl text-white/85 leading-relaxed italic mb-8 font-light">
+              <p className="text-xl md:text-2xl text-[#F8F8FF]/85 leading-relaxed italic mb-8 font-light">
                 &ldquo;{REVIEWS[active].text}&rdquo;
               </p>
-              <p className="text-sm font-black tracking-widest uppercase text-white">
+              <p className="text-sm font-black tracking-widest uppercase text-[#F8F8FF]">
                 {REVIEWS[active].name}
               </p>
-              <p className="text-xs text-white/35 mt-1 tracking-wider">
+              <p className="text-xs text-[#F8F8FF]/35 mt-1 tracking-wider">
                 {REVIEWS[active].business} · {REVIEWS[active].location}
               </p>
               <div className="inline-block mt-4 px-4 py-1.5 border border-purple-500/30 bg-purple-500/8">
@@ -109,13 +109,13 @@ export function Testimonials() {
         </div>
 
         {/* Dots */}
-        <div className="flex justify-center gap-2 mb-16">
+        <div className="flex justify-center gap-2 mb-12">
           {REVIEWS.map((_, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}
-              className={`h-1 rounded-full transition-all duration-400 ${
-                i === active ? "bg-purple-500 w-8" : "bg-white/20 w-2 hover:bg-white/40"
+              className={`h-1 rounded-full transition-all duration-300 ${
+                i === active ? "bg-purple-500 w-8" : "bg-[#F8F8FF]/20 w-2 hover:bg-[#F8F8FF]/40"
               }`}
               aria-label={`Review ${i + 1}`}
             />
@@ -136,10 +136,10 @@ export function Testimonials() {
                 active === i ? "bg-purple-500/[0.06]" : "hover:bg-white/[0.02]"
               }`}
             >
-              <p className="text-sm text-white/60 leading-relaxed line-clamp-3 mb-4 italic">
+              <p className="text-sm text-[#F8F8FF]/60 leading-relaxed line-clamp-3 mb-4 italic">
                 &ldquo;{review.text}&rdquo;
               </p>
-              <p className="text-xs font-black tracking-wider uppercase text-white">{review.name}</p>
+              <p className="text-xs font-black tracking-wider uppercase text-[#F8F8FF]">{review.name}</p>
               <p className="text-[11px] text-purple-400 mt-0.5">{review.result}</p>
             </motion.button>
           ))}

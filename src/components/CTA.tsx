@@ -25,7 +25,6 @@ export function CTA() {
     e.preventDefault();
     setStatus("submitting");
     setErrorMsg("");
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -41,22 +40,24 @@ export function CTA() {
     }
   };
 
-  const set = (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+  const set = (field: keyof FormState) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+      setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
   const inputClass =
-    "w-full bg-white/[0.03] border border-white/10 text-white text-sm px-5 py-3.5 outline-none focus:border-purple-500/50 transition-colors placeholder:text-white/20";
+    "w-full bg-white/[0.03] border border-white/10 text-[#F8F8FF] text-sm px-5 py-3.5 outline-none focus:border-purple-500/50 transition-colors placeholder:text-[#F8F8FF]/20";
 
   return (
-    <section id="contact" className="py-32 bg-[#0D0D1A] relative overflow-hidden">
-      {/* Background glow */}
+    <section id="contact" className="py-20 md:py-28 lg:py-32 bg-[#0D0D1A] relative overflow-hidden">
+      {/* Background glow — decorative */}
       <div
         className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none pulse-glow"
+        aria-hidden="true"
         style={{ background: "radial-gradient(ellipse, rgba(123,47,190,0.18) 0%, transparent 65%)" }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+      <div className="mx-auto max-w-7xl px-6 md:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Left */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
@@ -68,9 +69,7 @@ export function CTA() {
               Let&apos;s Talk
             </p>
             <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight mb-6">
-              Ready to Stop
-              <br />
-              Leaving Money{" "}
+              Ready to Stop Leaving Money{" "}
               <span
                 style={{
                   background: "linear-gradient(135deg, #A855F7, #7B2FBE)",
@@ -82,31 +81,30 @@ export function CTA() {
                 on the Table?
               </span>
             </h2>
-            <p className="text-sm text-white/50 leading-relaxed max-w-md mb-10">
-              Book a free strategy call. We&apos;ll look at your current marketing, tell you exactly what&apos;s
-              holding you back, and lay out a plan — no pressure, no pitch.
+            <p className="text-base text-[#F8F8FF]/50 leading-relaxed max-w-prose mb-8">
+              Book a free call. We&apos;ll look at your current marketing, find what&apos;s holding
+              you back, and lay out a clear plan — no pressure, no pitch.
             </p>
 
-            <div className="space-y-5 mb-12">
+            <div className="space-y-4 mb-10">
               {[
                 "Free 30-minute strategy session",
                 "No obligation — just clarity",
-                "We work with a limited number of clients at a time",
+                "Limited client spots at a time",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-4">
                   <span className="text-purple-400 text-xs">◆</span>
-                  <p className="text-sm text-white/60">{item}</p>
+                  <p className="text-sm text-[#F8F8FF]/60">{item}</p>
                 </div>
               ))}
             </div>
 
             <div className="p-6 border border-white/[0.06] bg-white/[0.02]">
-              <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-2">
+              <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#F8F8FF]/30 mb-2">
                 Based in Baltimore, MD
               </p>
-              <p className="text-sm text-white/55">
-                Serving service businesses across MD, DC, VA and beyond.
-                Remote engagements available nationwide.
+              <p className="text-sm text-[#F8F8FF]/55">
+                Serving MD, DC, VA and beyond. Remote engagements available nationwide.
               </p>
             </div>
           </motion.div>
@@ -130,51 +128,21 @@ export function CTA() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-black uppercase tracking-tight mb-3">We Got It.</h3>
-                <p className="text-sm text-white/50 max-w-xs">
+                <p className="text-sm text-[#F8F8FF]/50 max-w-xs">
                   Expect a reply within 24 hours. Looking forward to hearing about your business.
                 </p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    required
-                    placeholder="Your Name"
-                    value={form.name}
-                    onChange={set("name")}
-                    className={inputClass}
-                  />
-                  <input
-                    type="text"
-                    placeholder="Business Name"
-                    value={form.business}
-                    onChange={set("business")}
-                    className={inputClass}
-                  />
+                  <input type="text" required placeholder="Your Name" value={form.name} onChange={set("name")} className={inputClass} />
+                  <input type="text" placeholder="Business Name" value={form.business} onChange={set("business")} className={inputClass} />
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                  <input
-                    type="email"
-                    required
-                    placeholder="Email Address"
-                    value={form.email}
-                    onChange={set("email")}
-                    className={inputClass}
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Phone (optional)"
-                    value={form.phone}
-                    onChange={set("phone")}
-                    className={inputClass}
-                  />
+                  <input type="email" required placeholder="Email Address" value={form.email} onChange={set("email")} className={inputClass} />
+                  <input type="tel" placeholder="Phone (optional)" value={form.phone} onChange={set("phone")} className={inputClass} />
                 </div>
-                <select
-                  value={form.service}
-                  onChange={set("service")}
-                  className={`${inputClass} appearance-none`}
-                >
+                <select value={form.service} onChange={set("service")} className={`${inputClass} appearance-none`}>
                   <option value="" disabled>Service You&apos;re Interested In</option>
                   <option value="Ad Management (Retainer)">Ad Management (Retainer)</option>
                   <option value="Custom Website">Custom Website</option>
@@ -186,24 +154,22 @@ export function CTA() {
                 <textarea
                   rows={4}
                   required
-                  placeholder="Tell us about your business and what you're looking to achieve..."
+                  placeholder="Tell us about your business and what you want to achieve..."
                   value={form.message}
                   onChange={set("message")}
                   className={`${inputClass} resize-none`}
                 />
-
                 {status === "error" && (
                   <p className="text-xs text-red-400 tracking-wide">{errorMsg}</p>
                 )}
-
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full bg-[#7B2FBE] hover:bg-[#A855F7] disabled:opacity-60 disabled:cursor-not-allowed text-white text-[11px] font-black tracking-[0.3em] uppercase py-4 transition-colors duration-300"
+                  className="w-full bg-[#7B2FBE] hover:bg-[#A855F7] disabled:opacity-60 disabled:cursor-not-allowed text-[#F8F8FF] text-[11px] font-black tracking-[0.3em] uppercase py-4 transition-colors duration-300"
                 >
                   {status === "submitting" ? "Sending…" : "Book My Free Strategy Call"}
                 </button>
-                <p className="text-center text-[10px] text-white/20 tracking-wider">
+                <p className="text-center text-[10px] text-[#F8F8FF]/20 tracking-wider">
                   No spam. No pitch. Just a real conversation.
                 </p>
               </form>
