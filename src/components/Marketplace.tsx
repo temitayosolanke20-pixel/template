@@ -191,7 +191,7 @@ export function Marketplace() {
   const [activeTab, setActiveTab] = useState<Tab>("templates");
 
   return (
-    <section id="marketplace" className="py-24 md:py-32" style={{ background: "#0a0a14" }}>
+    <section id="marketplace" className="py-32 md:py-40 lg:py-48" style={{ background: "#0a0a14" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

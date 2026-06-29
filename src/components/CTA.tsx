@@ -36,7 +36,7 @@ export function CTA() {
   const inputClass = "w-full bg-white/[0.03] border border-white/10 text-[#F8F8FF] text-sm px-5 py-4 outline-none focus:border-purple-500/50 transition-colors placeholder:text-[#F8F8FF]/20";
 
   return (
-    <section id="contact" className="py-32 md:py-40 bg-[#0D0D1A] relative overflow-hidden">
+    <section id="contact" className="py-32 md:py-40 lg:py-48 bg-[#0D0D1A] relative overflow-hidden">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] pointer-events-none pulse-glow" aria-hidden="true"
         style={{ background: "radial-gradient(ellipse, rgba(123,47,190,0.18) 0%, transparent 65%)" }}
       />

@@ -77,7 +77,7 @@ function VideoCard({ video, index }: { video: (typeof VIDEOS)[0]; index: number 
 
 export function CreativeShowcase() {
   return (
-    <section id="creative-work" className="py-32 md:py-40 bg-[#0D0D1A]">
+    <section id="creative-work" className="py-32 md:py-40 lg:py-48 bg-[#0D0D1A]">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>

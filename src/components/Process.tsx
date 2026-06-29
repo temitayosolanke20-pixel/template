@@ -6,7 +6,7 @@ const STEPS = [
   {
     step: "01",
     title: "Discovery Call",
-    description: "We learn your goals. No pitch.",
+    description: "We learn your business, market, and goals.",
   },
   {
     step: "02",
@@ -16,13 +16,13 @@ const STEPS = [
   {
     step: "03",
     title: "Launch & Optimize",
-    description: "Live in days. Weekly cuts and scaling.",
+    description: "Live fast, weekly optimization until leads flow.",
   },
 ];
 
 export function Process() {
   return (
-    <section id="process" className="py-32 md:py-40 bg-[#0D0D1A]">
+    <section id="process" className="py-32 md:py-40 lg:py-48 bg-[#0D0D1A]">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

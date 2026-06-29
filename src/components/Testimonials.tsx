@@ -43,7 +43,7 @@ export function Testimonials() {
   }, []);
 
   return (
-    <section className="py-32 md:py-40 bg-[#0D0D1A]">
+    <section className="py-32 md:py-40 lg:py-48 bg-[#0D0D1A]">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="text-center mb-16"

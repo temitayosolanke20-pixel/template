@@ -45,7 +45,7 @@ function ZPMark() {
 export function Footer() {
   return (
     <footer className="border-t border-white/[0.06] bg-[#0D0D1A]">
-      <div className="mx-auto max-w-7xl px-6 md:px-8 py-16 md:py-20">
+      <div className="mx-auto max-w-7xl px-6 md:px-8 py-20 md:py-28 lg:py-32">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="md:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-6 group">

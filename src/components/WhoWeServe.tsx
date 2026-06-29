@@ -15,7 +15,7 @@ const INDUSTRIES = [
 
 export function WhoWeServe() {
   return (
-    <section id="who-we-serve" className="py-32 md:py-40 border-t border-white/[0.05]" style={{ background: "#0a0a14" }}>
+    <section id="who-we-serve" className="py-32 md:py-40 lg:py-48 border-t border-white/[0.05]" style={{ background: "#0a0a14" }}>
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <motion.div
@@ -44,8 +44,8 @@ export function WhoWeServe() {
               </span>
             </h2>
             <p className="text-2xl font-black text-[#F8F8FF]/60">
-              One job ={" "}
-              <span className="text-[#F8F8FF]">$1,000–$5,000+</span>.
+              One job means{" "}
+              <span className="text-[#F8F8FF]">$1,000–$5,000+</span> in revenue.
             </p>
           </motion.div>
 

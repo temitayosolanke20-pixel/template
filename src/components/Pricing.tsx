@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function Pricing() {
   return (
-    <section id="pricing" className="py-32 md:py-40 border-t border-white/[0.05]" style={{ background: "#0a0a14" }}>
+    <section id="pricing" className="py-32 md:py-40 lg:py-48 border-t border-white/[0.05]" style={{ background: "#0a0a14" }}>
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="text-center mb-16"

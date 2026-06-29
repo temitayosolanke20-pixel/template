@@ -8,7 +8,7 @@ const SERVICES = [
     number: "01",
     label: "Marketing & Growth",
     title: "Ad Management",
-    description: "Leads on retainer. One new customer covers the fee.",
+    description: "Consistent leads on a flat monthly retainer.",
     highlight: "Lead guarantee or you don't pay.",
     cta: "Get Started",
     href: "#contact",
@@ -22,7 +22,7 @@ const SERVICES = [
     number: "02",
     label: "Websites",
     title: "Web Creation",
-    description: "Custom builds or premium templates. Launch in days.",
+    description: "Custom site or premium template, ready in days.",
     highlight: "Mobile-first. Built to convert.",
     cta: "See Templates",
     href: "#marketplace",
@@ -36,7 +36,7 @@ const SERVICES = [
     number: "03",
     label: "Creative Package",
     title: "Video Creatives",
-    description: "Ad-ready video delivered flat-rate. No retainer.",
+    description: "Polished ad-ready video, flat-rate, no retainer needed.",
     highlight: "Starting at $300.",
     cta: "Order a Package",
     href: "#marketplace",
@@ -111,7 +111,7 @@ function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: numb
 
 export function Services() {
   return (
-    <section id="services" className="py-32 md:py-40 bg-[#0D0D1A]">
+    <section id="services" className="py-32 md:py-40 lg:py-48 bg-[#0D0D1A]">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}

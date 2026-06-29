@@ -34,7 +34,7 @@ export function Stats() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-20 md:py-24 border-y border-white/[0.05] bg-[#0D0D1A]">
+    <section ref={ref} className="py-24 md:py-32 lg:py-40 border-y border-white/[0.05] bg-[#0D0D1A]">
       <div className="mx-auto max-w-7xl px-6 md:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/[0.05]">
           {STATS.map((stat, i) => (
