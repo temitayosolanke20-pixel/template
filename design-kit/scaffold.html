@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Structural Scaffold — Spacing & Layout Proof</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ──────────────────────────────────────────── */
+    :root {
+      /* spacing scale (8px base) */
+      --sp-1:   4px;
+      --sp-2:   8px;
+      --sp-3:   12px;
+      --sp-4:   16px;
+      --sp-5:   20px;
+      --sp-6:   24px;
+      --sp-8:   32px;
+      --sp-10:  40px;
+      --sp-12:  48px;
+      --sp-14:  56px;
+      --sp-16:  64px;
+      --sp-20:  80px;
+      --sp-24:  96px;
+      --sp-30: 120px;
+
+      /* section padding */
+      --section-hero:     120px;
+      --section-standard:  96px;
+      --section-compact:   64px;
+      --section-band:      48px;
+
+      /* container */
+      --container-max:  1200px;
+      --container-gutter: 48px;
+
+      /* grid gaps */
+      --gap-cards:   32px;
+      --gap-stats:   24px;
+      --gap-logos:   40px;
+      --gap-split:   80px;
+
+      /* typography */
+      --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+                   Helvetica Neue, Arial, sans-serif;
+      --text-display:     3.5rem;   /* 56px */
+      --text-h2:          2.5rem;   /* 40px */
+      --text-h3:          1.5rem;   /* 24px */
+      --text-h4:          1rem;     /* 16px */
+      --text-body:        1.125rem; /* 18px */
+      --text-small:       0.875rem; /* 14px */
+      --text-stat:        3.5rem;   /* 56px */
+
+      --lh-display: 1.1;
+      --lh-heading: 1.15;
+      --lh-subhead: 1.3;
+      --lh-body:    1.7;
+
+      --ls-display: -0.03em;
+      --ls-h2:      -0.02em;
+      --ls-h3:      -0.01em;
+      --ls-label:    0.04em;
+
+      /* neutral scaffold palette — no brand colors */
+      --color-white:       #ffffff;
+      --color-surface-1:   #ffffff;
+      --color-surface-2:   #f3f4f6;
+      --color-surface-dark:#1f2937;
+      --color-border:      #e5e7eb;
+      --color-placeholder: #d1d5db;
+      --color-text-primary:#111827;
+      --color-text-muted:  #6b7280;
+      --color-text-light:  #d1d5db;
+
+      /* component */
+      --radius-card: 12px;
+      --shadow-card: 0 4px 16px rgba(0,0,0,0.08);
+      --nav-height:  72px;
+    }
+
+    /* ─── RESET ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; }
+    body {
+      font-family: var(--font-sans);
+      font-size: var(--text-body);
+      line-height: var(--lh-body);
+      color: var(--color-text-primary);
+      background: var(--color-surface-1);
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── LAYOUT UTILITIES ────────────────────────────────── */
+    .container {
+      max-width: var(--container-max);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--container-gutter);
+      padding-right: var(--container-gutter);
+    }
+
+    .section {
+      padding-top: var(--section-standard);
+      padding-bottom: var(--section-standard);
+    }
+    .section--hero    { padding-top: var(--section-hero); padding-bottom: var(--section-hero); }
+    .section--compact { padding-top: var(--section-compact); padding-bottom: var(--section-compact); }
+    .section--band    { padding-top: var(--section-band); padding-bottom: var(--section-band); }
+
+    .bg-light { background: var(--color-surface-2); }
+    .bg-dark  { background: var(--color-surface-dark); }
+
+    /* ─── TYPOGRAPHY ──────────────────────────────────────── */
+    .text-display {
+      font-size: var(--text-display);
+      font-weight: 800;
+      line-height: var(--lh-display);
+      letter-spacing: var(--ls-display);
+    }
+    .text-h2 {
+      font-size: var(--text-h2);
+      font-weight: 700;
+      line-height: var(--lh-heading);
+      letter-spacing: var(--ls-h2);
+    }
+    .text-h3 {
+      font-size: var(--text-h3);
+      font-weight: 600;
+      line-height: var(--lh-subhead);
+      letter-spacing: var(--ls-h3);
+    }
+    .text-label {
+      font-size: var(--text-h4);
+      font-weight: 600;
+      letter-spacing: var(--ls-label);
+      text-transform: uppercase;
+    }
+    .text-body   { font-size: var(--text-body); line-height: var(--lh-body); }
+    .text-small  { font-size: var(--text-small); }
+    .text-stat {
+      font-size: var(--text-stat);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+    }
+    .text-muted  { color: var(--color-text-muted); }
+    .text-light  { color: var(--color-text-light); }
+    .text-center { text-align: center; }
+    .text-white  { color: var(--color-white); }
+
+    /* ─── WIREFRAME PLACEHOLDER BLOCKS ───────────────────── */
+    .ph-block {
+      background: var(--color-placeholder);
+      border-radius: 4px;
+      display: block;
+    }
+    .ph-image {
+      background: var(--color-placeholder);
+      border-radius: var(--radius-card);
+      width: 100%;
+      aspect-ratio: 16/10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-muted);
+      font-size: var(--text-small);
+      border: 2px dashed var(--color-border);
+    }
+    .ph-icon {
+      width: 48px; height: 48px;
+      background: var(--color-border);
+      border-radius: 10px;
+      margin-bottom: var(--sp-5);
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    .nav {
+      height: var(--nav-height);
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .nav__logo .ph-block {
+      width: 120px; height: 28px;
+    }
+    .nav__links {
+      display: flex;
+      gap: var(--sp-8);
+      list-style: none;
+    }
+    .nav__links li {
+      font-size: var(--text-small);
+      font-weight: 500;
+      color: var(--color-text-muted);
+      cursor: pointer;
+    }
+    .nav__links li .ph-block { width: 72px; height: 14px; }
+    .nav__cta .ph-block { width: 120px; height: 40px; border-radius: 9999px; }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero__content {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero__eyebrow {
+      display: inline-block;
+      margin-bottom: var(--sp-5);
+    }
+    .hero__headline {
+      margin-bottom: var(--sp-5);
+    }
+    .hero__lede {
+      margin-bottom: var(--sp-8);
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero__actions {
+      display: flex;
+      gap: var(--sp-4);
+      justify-content: center;
+      margin-bottom: var(--sp-16);
+    }
+    .hero__actions .ph-block:first-child { width: 160px; height: 52px; border-radius: 9999px; }
+    .hero__actions .ph-block:last-child  { width: 140px; height: 52px; border-radius: 9999px; background: transparent; border: 2px solid var(--color-border); }
+    .hero__visual { margin-top: var(--sp-16); }
+
+    /* ─── LOGO STRIP ──────────────────────────────────────── */
+    .logo-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--gap-logos);
+      flex-wrap: wrap;
+    }
+    .logo-strip__item .ph-block { width: 100px; height: 24px; }
+
+    /* ─── FEATURES GRID ───────────────────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: var(--gap-cards);
+      row-gap: var(--gap-cards);
+    }
+    .feature-card {
+      padding: var(--sp-8);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      background: var(--color-white);
+    }
+    .feature-card__title { margin-bottom: var(--sp-3); }
+    .feature-card__body  { color: var(--color-text-muted); }
+
+    /* ─── SPLIT LAYOUT ────────────────────────────────────── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-split);
+      align-items: center;
+    }
+    .split__text { }
+    .split__text .section-eyebrow { margin-bottom: var(--sp-4); }
+    .split__text .section-headline { margin-bottom: var(--sp-5); }
+    .split__text .section-body { margin-bottom: var(--sp-8); color: var(--color-text-muted); }
+    .split__text .ph-block { width: 140px; height: 44px; border-radius: 9999px; }
+
+    /* ─── STATS ───────────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--gap-stats);
+      text-align: center;
+    }
+    .stat-item__number {
+      margin-bottom: var(--sp-2);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 2.5rem; /* scale down for long placeholder text */
+    }
+    .stat-item__label  { color: var(--color-text-light); }
+
+    /* ─── TESTIMONIALS ────────────────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap-cards);
+    }
+    .testimonial-card {
+      padding: var(--sp-8);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-card);
+      background: rgba(255,255,255,0.05);
+    }
+    .testimonial-card__quote { margin-bottom: var(--sp-6); color: var(--color-text-light); font-size: var(--text-body); }
+    .testimonial-card__author { display: flex; align-items: center; gap: var(--sp-3); }
+    .testimonial-card__avatar { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.15); flex-shrink: 0; }
+    .testimonial-card__meta .ph-block:first-child { width: 100px; height: 13px; margin-bottom: 6px; background: rgba(255,255,255,0.2); }
+    .testimonial-card__meta .ph-block:last-child  { width: 72px;  height: 11px; background: rgba(255,255,255,0.1); }
+
+    /* ─── SECTION HEADER (centered) ──────────────────────── */
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--sp-16);
+    }
+    .section-eyebrow { margin-bottom: var(--sp-4); }
+    .section-headline { margin-bottom: var(--sp-5); }
+    .section-lede { color: var(--color-text-muted); }
+
+    /* ─── CTA BAND ────────────────────────────────────────── */
+    .cta-band { text-align: center; }
+    .cta-band__headline { margin-bottom: var(--sp-8); }
+    .cta-band__actions { display: flex; gap: var(--sp-4); justify-content: center; }
+    .cta-band__actions .ph-block:first-child { width: 160px; height: 52px; border-radius: 9999px; background: var(--color-white); }
+    .cta-band__actions .ph-block:last-child  { width: 140px; height: 52px; border-radius: 9999px; background: transparent; border: 2px solid rgba(255,255,255,0.25); }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    .footer {
+      background: var(--color-surface-dark);
+      padding-top: var(--section-band);
+      padding-bottom: 32px;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--gap-cards);
+      margin-bottom: var(--sp-12);
+    }
+    .footer__brand .ph-block { width: 100px; height: 22px; margin-bottom: var(--sp-4); }
+    .footer__brand p { color: var(--color-text-muted); font-size: var(--text-small); max-width: 260px; }
+    .footer__col-title { color: var(--color-text-light); font-size: var(--text-small); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: var(--sp-4); }
+    .footer__links { list-style: none; display: flex; flex-direction: column; gap: var(--sp-3); }
+    .footer__links li .ph-block { height: 13px; background: rgba(255,255,255,0.12); }
+    .footer__links li:nth-child(1) .ph-block { width: 90px; }
+    .footer__links li:nth-child(2) .ph-block { width: 70px; }
+    .footer__links li:nth-child(3) .ph-block { width: 80px; }
+    .footer__links li:nth-child(4) .ph-block { width: 60px; }
+    .footer__bottom {
+      padding-top: var(--sp-8);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer__bottom .ph-block { height: 12px; background: rgba(255,255,255,0.1); }
+    .footer__bottom .ph-block:first-child { width: 200px; }
+    .footer__bottom .ph-block:last-child  { width: 120px; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-row     { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr 1fr; }
+      .footer__grid  { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      :root {
+        --text-display:  2.25rem;
+        --text-h2:       1.75rem;
+        --section-hero:     72px;
+        --section-standard: 64px;
+        --section-compact:  48px;
+        --container-gutter: 24px;
+        --gap-split: 48px;
+      }
+      .features-grid { grid-template-columns: 1fr; }
+      .stats-row     { grid-template-columns: repeat(2, 1fr); }
+      .split         { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .footer__grid  { grid-template-columns: 1fr; }
+      .nav__links    { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAV
+  ════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="container nav__inner">
+      <div class="nav__logo"><span class="ph-block"></span></div>
+      <ul class="nav__links">
+        <li><span class="ph-block"></span></li><!-- {{NAV_LINK_1}} -->
+        <li><span class="ph-block"></span></li><!-- {{NAV_LINK_2}} -->
+        <li><span class="ph-block"></span></li><!-- {{NAV_LINK_3}} -->
+        <li><span class="ph-block"></span></li><!-- {{NAV_LINK_4}} -->
+        <li><span class="ph-block"></span></li><!-- {{NAV_LINK_5}} -->
+      </ul>
+      <div class="nav__cta"><span class="ph-block"></span></div><!-- {{NAV_CTA}} -->
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════ -->
+  <section class="section section--hero bg-dark">
+    <div class="container">
+      <div class="hero__content">
+
+        <span class="hero__eyebrow text-label text-light">
+          {{HERO_EYEBROW_LABEL}}
+        </span>
+
+        <h1 class="hero__headline text-display text-white">
+          {{HERO_HEADLINE}}
+        </h1>
+
+        <p class="hero__lede text-body text-light">
+          {{HERO_LEDE}}
+        </p>
+
+        <div class="hero__actions">
+          <span class="ph-block"></span><!-- {{HERO_CTA_PRIMARY}} -->
+          <span class="ph-block"></span><!-- {{HERO_CTA_SECONDARY}} -->
+        </div>
+
+        <div class="hero__visual">
+          <div class="ph-image">{{HERO_PRODUCT_SCREENSHOT}}</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       LOGO / SOCIAL PROOF STRIP
+  ════════════════════════════════════════════ -->
+  <section class="section--band bg-light">
+    <div class="container">
+      <p class="text-center text-small text-muted" style="margin-bottom: var(--sp-8);">
+        {{LOGO_STRIP_LABEL}}
+      </p>
+      <div class="logo-strip">
+        <div class="logo-strip__item"><span class="ph-block"></span></div><!-- {{PARTNER_LOGO_1}} -->
+        <div class="logo-strip__item"><span class="ph-block"></span></div><!-- {{PARTNER_LOGO_2}} -->
+        <div class="logo-strip__item"><span class="ph-block"></span></div><!-- {{PARTNER_LOGO_3}} -->
+        <div class="logo-strip__item"><span class="ph-block"></span></div><!-- {{PARTNER_LOGO_4}} -->
+        <div class="logo-strip__item"><span class="ph-block"></span></div><!-- {{PARTNER_LOGO_5}} -->
+        <div class="logo-strip__item"><span class="ph-block"></span></div><!-- {{PARTNER_LOGO_6}} -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FEATURES GRID  (3-up cards)
+  ════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+
+      <div class="section-header">
+        <p class="section-eyebrow text-label text-muted">{{FEATURES_EYEBROW}}</p>
+        <h2 class="section-headline text-h2">{{FEATURES_HEADLINE}}</h2>
+        <p class="section-lede text-body">{{FEATURES_LEDE}}</p>
+      </div>
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="ph-icon"></div>
+          <h3 class="feature-card__title text-h3">{{SERVICE_1_TITLE}}</h3>
+          <p class="feature-card__body text-body">{{SERVICE_1_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="ph-icon"></div>
+          <h3 class="feature-card__title text-h3">{{SERVICE_2_TITLE}}</h3>
+          <p class="feature-card__body text-body">{{SERVICE_2_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="ph-icon"></div>
+          <h3 class="feature-card__title text-h3">{{SERVICE_3_TITLE}}</h3>
+          <p class="feature-card__body text-body">{{SERVICE_3_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="ph-icon"></div>
+          <h3 class="feature-card__title text-h3">{{SERVICE_4_TITLE}}</h3>
+          <p class="feature-card__body text-body">{{SERVICE_4_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="ph-icon"></div>
+          <h3 class="feature-card__title text-h3">{{SERVICE_5_TITLE}}</h3>
+          <p class="feature-card__body text-body">{{SERVICE_5_BODY}}</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="ph-icon"></div>
+          <h3 class="feature-card__title text-h3">{{SERVICE_6_TITLE}}</h3>
+          <p class="feature-card__body text-body">{{SERVICE_6_BODY}}</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SPLIT LAYOUT  (text left / visual right)
+  ════════════════════════════════════════════ -->
+  <section class="section bg-light">
+    <div class="container">
+      <div class="split">
+        <div class="split__text">
+          <p class="section-eyebrow text-label text-muted">{{SPLIT_1_EYEBROW}}</p>
+          <h2 class="section-headline text-h2">{{SPLIT_1_HEADLINE}}</h2>
+          <p class="section-body text-body">{{SPLIT_1_BODY}}</p>
+          <span class="ph-block"></span><!-- {{SPLIT_1_CTA}} -->
+        </div>
+        <div class="split__visual">
+          <div class="ph-image">{{SPLIT_1_VISUAL}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SPLIT LAYOUT  (visual left / text right)
+  ════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="split">
+        <div class="split__visual">
+          <div class="ph-image">{{SPLIT_2_VISUAL}}</div>
+        </div>
+        <div class="split__text">
+          <p class="section-eyebrow text-label text-muted">{{SPLIT_2_EYEBROW}}</p>
+          <h2 class="section-headline text-h2">{{SPLIT_2_HEADLINE}}</h2>
+          <p class="section-body text-body">{{SPLIT_2_BODY}}</p>
+          <span class="ph-block"></span><!-- {{SPLIT_2_CTA}} -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       STATS / PROOF SECTION
+  ════════════════════════════════════════════ -->
+  <section class="section bg-dark">
+    <div class="container">
+
+      <div class="section-header">
+        <h2 class="section-headline text-h2 text-white">{{STATS_HEADLINE}}</h2>
+        <p class="section-lede text-body text-light">{{STATS_LEDE}}</p>
+      </div>
+
+      <div class="stats-row">
+
+        <div class="stat-item text-center">
+          <p class="stat-item__number text-stat text-white">{{STAT1}}</p>
+          <p class="stat-item__label text-label text-light">{{STAT_1_LABEL}}</p>
+        </div>
+
+        <div class="stat-item text-center">
+          <p class="stat-item__number text-stat text-white">{{STAT2}}</p>
+          <p class="stat-item__label text-label text-light">{{STAT_2_LABEL}}</p>
+        </div>
+
+        <div class="stat-item text-center">
+          <p class="stat-item__number text-stat text-white">{{STAT3}}</p>
+          <p class="stat-item__label text-label text-light">{{STAT_3_LABEL}}</p>
+        </div>
+
+        <div class="stat-item text-center">
+          <p class="stat-item__number text-stat text-white">{{STAT4}}</p>
+          <p class="stat-item__label text-label text-light">{{STAT_4_LABEL}}</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS
+  ════════════════════════════════════════════ -->
+  <section class="section bg-dark">
+    <div class="container">
+
+      <div class="section-header">
+        <h2 class="section-headline text-h2 text-white">{{TESTIMONIALS_HEADLINE}}</h2>
+      </div>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">"{{TESTIMONIAL_1_QUOTE}}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar"></div>
+            <div class="testimonial-card__meta">
+              <span class="ph-block"></span><!-- {{TESTIMONIAL_1_NAME}} -->
+              <span class="ph-block"></span><!-- {{TESTIMONIAL_1_TITLE}} -->
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">"{{TESTIMONIAL_2_QUOTE}}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar"></div>
+            <div class="testimonial-card__meta">
+              <span class="ph-block"></span><!-- {{TESTIMONIAL_2_NAME}} -->
+              <span class="ph-block"></span><!-- {{TESTIMONIAL_2_TITLE}} -->
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-card__quote">"{{TESTIMONIAL_3_QUOTE}}"</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar"></div>
+            <div class="testimonial-card__meta">
+              <span class="ph-block"></span><!-- {{TESTIMONIAL_3_NAME}} -->
+              <span class="ph-block"></span><!-- {{TESTIMONIAL_3_TITLE}} -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CTA BAND
+  ════════════════════════════════════════════ -->
+  <section class="section bg-dark cta-band">
+    <div class="container">
+      <h2 class="cta-band__headline text-h2 text-white">{{CTA_HEADLINE}}</h2>
+      <p class="text-body text-light" style="margin-bottom: var(--sp-8); max-width: 480px; margin-left: auto; margin-right: auto;">
+        {{CTA_LEDE}}
+      </p>
+      <div class="cta-band__actions">
+        <span class="ph-block"></span><!-- {{CTA_PRIMARY}} -->
+        <span class="ph-block"></span><!-- {{CTA_SECONDARY}} -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <div class="footer__brand">
+          <span class="ph-block"></span><!-- {{FOOTER_LOGO}} -->
+          <p class="text-muted text-small" style="margin-top: var(--sp-4);">{{FOOTER_TAGLINE}}</p>
+        </div>
+
+        <div>
+          <p class="footer__col-title">{{FOOTER_COL_1_TITLE}}</p>
+          <ul class="footer__links">
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_1_1}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_1_2}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_1_3}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_1_4}} -->
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">{{FOOTER_COL_2_TITLE}}</p>
+          <ul class="footer__links">
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_2_1}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_2_2}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_2_3}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_2_4}} -->
+          </ul>
+        </div>
+
+        <div>
+          <p class="footer__col-title">{{FOOTER_COL_3_TITLE}}</p>
+          <ul class="footer__links">
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_3_1}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_3_2}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_3_3}} -->
+            <li><span class="ph-block"></span></li><!-- {{FOOTER_LINK_3_4}} -->
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer__bottom">
+        <span class="ph-block"></span><!-- {{FOOTER_COPYRIGHT}} -->
+        <span class="ph-block"></span><!-- {{FOOTER_LEGAL_LINKS}} -->
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
