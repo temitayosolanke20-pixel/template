@@ -1,26 +1,26 @@
 "use client";
 
-// ─── EDIT THIS ARRAY to change the scrolling announcement messages ───
 const ANNOUNCEMENTS = [
-  "FREE SHIPPING ON ORDERS OVER $150",
-  "★ NEW DROP — LIMITED QUANTITIES",
-  "USE CODE WELCOME10 FOR 10% OFF",
-  "WORLDWIDE SHIPPING AVAILABLE",
-  "★ SEASON 3 COLLECTION — AVAILABLE NOW",
-  "FREE RETURNS WITHIN 30 DAYS",
+  "RESULTS-DRIVEN AD MANAGEMENT — BUILT FOR SERVICE BUSINESSES",
+  "★ CUSTOM WEBSITES THAT CONVERT — NOT JUST LOOK GOOD",
+  "VIDEO CREATIVE PACKAGES STARTING AT $300",
+  "BALTIMORE, MD — SERVING CLIENTS NATIONWIDE",
+  "★ ONE NEW CUSTOMER CAN CHANGE EVERYTHING — WE HELP YOU GET THERE",
+  "LEAD GUARANTEES AVAILABLE — ASK ABOUT OUR PERFORMANCE MODEL",
 ];
 
 export function AnnouncementBar() {
-  // Duplicate so the loop is seamless
   const items = [...ANNOUNCEMENTS, ...ANNOUNCEMENTS];
-
   return (
-    <div className="bg-white text-black text-xs font-bold tracking-widest uppercase py-2 overflow-hidden">
+    <div
+      className="bg-[#7B2FBE] text-white text-[10px] font-bold tracking-[0.25em] uppercase py-2 overflow-hidden"
+      style={{ "--announcement-height": "32px" } as React.CSSProperties}
+    >
       <div className="marquee-track">
         {items.map((text, i) => (
           <span key={i} className="px-8 whitespace-nowrap">
             {text}
-            <span className="mx-6 opacity-40">|</span>
+            <span className="mx-6 opacity-50">◆</span>
           </span>
         ))}
       </div>

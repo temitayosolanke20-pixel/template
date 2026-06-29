@@ -1,26 +1,25 @@
 import { Hero } from "@/components/Hero";
-import { FeaturedCollections } from "@/components/FeaturedCollections";
-import { ProductGrid } from "@/components/ProductGrid";
+import { Services } from "@/components/Services";
+import { WhoWeServe } from "@/components/WhoWeServe";
+import { Stats } from "@/components/Stats";
+import { Process } from "@/components/Process";
+import { Marketplace } from "@/components/Marketplace";
 import { Testimonials } from "@/components/Testimonials";
-import { Newsletter } from "@/components/Newsletter";
+import { Pricing } from "@/components/Pricing";
+import { CTA } from "@/components/CTA";
 
 export default function Home() {
   return (
-    <main className="pt-16">
-      {/* Full-screen hero with headline + CTAs */}
+    <main className="pt-[calc(var(--announcement-height,32px)+64px)]">
       <Hero />
-
-      {/* Shop by category grid */}
-      <FeaturedCollections />
-
-      {/* New arrivals product grid */}
-      <ProductGrid />
-
-      {/* Customer reviews / testimonials */}
+      <Services />
+      <WhoWeServe />
+      <Stats />
+      <Process />
+      <Marketplace />
       <Testimonials />
-
-      {/* Email newsletter signup */}
-      <Newsletter />
+      <Pricing />
+      <CTA />
     </main>
   );
 }

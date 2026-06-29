@@ -11,13 +11,11 @@ html {
 }
 
 body {
-  background: #000;
-  color: #fff;
+  background: #0D0D1A;
+  color: #F8F8FF;
   overflow-x: hidden;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Marquee animation */
 @keyframes marquee {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -25,7 +23,7 @@ body {
 
 .marquee-track {
   display: flex;
-  animation: marquee 22s linear infinite;
+  animation: marquee 32s linear infinite;
   width: max-content;
 }
 
@@ -33,7 +31,15 @@ body {
   animation-play-state: paused;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #111; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.7; }
+}
+
+.pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #0D0D1A; }
+::-webkit-scrollbar-thumb { background: #7B2FBE; border-radius: 2px; }
