@@ -31,18 +31,18 @@ const STEPS = [
 
 export function Process() {
   return (
-    <section className="py-32 bg-[#0D0D1A]">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="process" className="py-24 md:py-32 bg-[#0D0D1A]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-14"
         >
           <p className="text-[10px] font-black tracking-[0.45em] uppercase text-purple-400 mb-4">
             How It Works
           </p>
-          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight leading-tight">
+          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-tight">
             From Zero to{" "}
             <span
               style={{
@@ -57,7 +57,7 @@ export function Process() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-0">
           {STEPS.map((step, i) => (
             <motion.div
               key={step.step}
@@ -65,17 +65,12 @@ export function Process() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="relative p-8 border-l border-t border-white/[0.06] first:border-l-white/[0.06] group hover:bg-purple-500/[0.03] transition-colors duration-400"
+              className="relative p-6 md:p-8 border border-white/[0.06] lg:border-r-0 last:lg:border-r group hover:bg-purple-500/[0.03] transition-colors duration-400"
             >
-              {/* Connector line */}
-              {i < STEPS.length - 1 && (
-                <div className="hidden lg:block absolute top-12 right-0 w-px h-0.5 bg-gradient-to-r from-purple-500/30 to-transparent translate-x-full z-10" />
-              )}
-
               <span
                 className="block text-5xl font-black tracking-tighter mb-6 leading-none"
                 style={{
-                  background: "linear-gradient(135deg, rgba(168,85,247,0.25), rgba(123,47,190,0.1))",
+                  background: "linear-gradient(135deg, rgba(168,85,247,0.22), rgba(123,47,190,0.08))",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -83,7 +78,7 @@ export function Process() {
               >
                 {step.step}
               </span>
-              <h3 className="text-lg font-black uppercase tracking-wide mb-3 text-white group-hover:text-purple-300 transition-colors duration-300">
+              <h3 className="text-base md:text-lg font-black uppercase tracking-wide mb-3 text-white group-hover:text-purple-300 transition-colors duration-300">
                 {step.title}
               </h3>
               <p className="text-sm text-white/45 leading-relaxed">{step.description}</p>

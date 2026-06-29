@@ -26,22 +26,17 @@ function AnimatedNumber({ value, suffix, inView }: { value: number; suffix: stri
     requestAnimationFrame(tick);
   }, [inView, value]);
 
-  return (
-    <span>
-      {display}
-      {suffix}
-    </span>
-  );
+  return <span>{display}{suffix}</span>;
 }
 
 export function Stats() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-24 border-y border-white/[0.05] bg-[#0D0D1A]">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-white/[0.04]">
+    <section ref={ref} className="py-16 md:py-24 border-y border-white/[0.05] bg-[#0D0D1A]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-white/[0.05]">
           {STATS.map((stat, i) => (
             <motion.div
               key={i}
@@ -49,10 +44,10 @@ export function Stats() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="bg-[#0D0D1A] p-10 text-center"
+              className="p-6 md:p-10 text-center"
             >
               <p
-                className="text-5xl md:text-6xl font-black tracking-tight"
+                className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight"
                 style={{
                   background: "linear-gradient(135deg, #A855F7, #7B2FBE)",
                   WebkitBackgroundClip: "text",
@@ -62,7 +57,9 @@ export function Stats() {
               >
                 <AnimatedNumber value={stat.value} suffix={stat.suffix} inView={inView} />
               </p>
-              <p className="mt-3 text-xs text-white/40 tracking-wider leading-relaxed">{stat.label}</p>
+              <p className="mt-2 md:mt-3 text-xs text-white/40 tracking-wider leading-relaxed">
+                {stat.label}
+              </p>
             </motion.div>
           ))}
         </div>

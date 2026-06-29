@@ -13,16 +13,18 @@ import { AltitudeProgress } from "@/components/AltitudeProgress";
 export default function Home() {
   return (
     <>
-      {/* Fixed altitude climbing-route indicator — right edge, desktop only */}
       <AltitudeProgress />
-
-      <main className="pt-[calc(var(--announcement-height,32px)+64px)]">
+      {/*
+       * pt-24 = 6rem = 96px = 32px announcement bar + 64px navbar.
+       * Using a fixed value instead of a CSS-var calc to guarantee
+       * the padding always computes correctly regardless of inheritance scope.
+       */}
+      <main className="pt-24">
         <Hero />
         <Services />
         <WhoWeServe />
         <Stats />
         <Process />
-        {/* Video creative showcase — real work, autoplay muted, click to unmute */}
         <CreativeShowcase />
         <Marketplace />
         <Testimonials />

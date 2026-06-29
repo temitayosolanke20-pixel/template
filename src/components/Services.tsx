@@ -51,12 +51,17 @@ const SERVICES = [
   },
 ];
 
+/*
+ * Hover tilt card. Uses rotateX/rotateY only — no preserve-3d or translateZ,
+ * which caused content to protrude outside the card's layout box and get
+ * clipped at section boundaries. The tilt effect is identical visually.
+ */
 function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [6, -6]), { stiffness: 250, damping: 25 });
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-6, 6]), { stiffness: 250, damping: 25 });
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [5, -5]), { stiffness: 250, damping: 25 });
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-5, 5]), { stiffness: 250, damping: 25 });
 
   const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = ref.current?.getBoundingClientRect();
@@ -71,7 +76,7 @@ function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: numb
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      style={{ rotateX, rotateY }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -80,56 +85,54 @@ function TiltCard({ service, index }: { service: typeof SERVICES[0]; index: numb
     >
       <div className="absolute inset-0 bg-gradient-to-br from-purple-600/0 group-hover:from-purple-600/[0.06] to-transparent transition-all duration-500 pointer-events-none" />
 
-      <div style={{ transform: "translateZ(24px)" }}>
-        <div className="flex items-start justify-between mb-6">
-          <span className="text-[10px] font-black tracking-[0.4em] uppercase text-purple-500/50">
-            {service.number}
-          </span>
-          <span className="text-purple-400/60 group-hover:text-purple-400 transition-colors duration-300">
-            {service.icon}
-          </span>
-        </div>
-
-        <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-2">
-          {service.label}
-        </p>
-        <h3 className="text-3xl font-black uppercase tracking-tight text-white mb-5">
-          {service.title}
-        </h3>
-        <p className="text-sm text-white/50 leading-relaxed mb-6">
-          {service.description}
-        </p>
-        <p className="text-[11px] font-bold text-purple-400 tracking-wide mb-6">
-          ◆ {service.highlight}
-        </p>
-        <a
-          href={service.href}
-          className="inline-flex items-center gap-2 text-[11px] font-black tracking-[0.25em] uppercase text-white/50 hover:text-white transition-colors group/link"
-        >
-          {service.cta}
-          <span className="text-purple-400 group-hover/link:translate-x-1.5 transition-transform duration-300">
-            →
-          </span>
-        </a>
+      <div className="flex items-start justify-between mb-6">
+        <span className="text-[10px] font-black tracking-[0.4em] uppercase text-purple-500/50">
+          {service.number}
+        </span>
+        <span className="text-purple-400/60 group-hover:text-purple-400 transition-colors duration-300">
+          {service.icon}
+        </span>
       </div>
+
+      <p className="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30 mb-2">
+        {service.label}
+      </p>
+      <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white mb-5">
+        {service.title}
+      </h3>
+      <p className="text-sm text-white/50 leading-relaxed mb-6">
+        {service.description}
+      </p>
+      <p className="text-[11px] font-bold text-purple-400 tracking-wide mb-6">
+        ◆ {service.highlight}
+      </p>
+      <a
+        href={service.href}
+        className="inline-flex items-center gap-2 text-[11px] font-black tracking-[0.25em] uppercase text-white/50 hover:text-white transition-colors group/link"
+      >
+        {service.cta}
+        <span className="text-purple-400 group-hover/link:translate-x-1.5 transition-transform duration-300">
+          →
+        </span>
+      </a>
     </motion.div>
   );
 }
 
 export function Services() {
   return (
-    <section id="services" className="py-32 bg-[#0D0D1A]">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="services" className="py-24 md:py-32 bg-[#0D0D1A]">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16"
+          className="mb-14"
         >
           <p className="text-[10px] font-black tracking-[0.45em] uppercase text-purple-400 mb-4">
             What We Do
           </p>
-          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-none">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none">
             Three Ways
             <br />
             <span
@@ -145,7 +148,7 @@ export function Services() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/[0.04]" style={{ perspective: "1200px" }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {SERVICES.map((s, i) => (
             <TiltCard key={s.number} service={s} index={i} />
           ))}
